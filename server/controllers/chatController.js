@@ -19,12 +19,12 @@ export const chatWithAI = async (
     });
 
   } catch (error) {
-    console.error(error);
+    console.error("Chat Error:", error);
+    console.error("Message:", error.message);
 
     res.status(500).json({
-      success: false,
-      response:
-        "AI Assistant is currently unavailable.",
-    });
+  success: false,
+  error: error.message,
+});
   }
 };

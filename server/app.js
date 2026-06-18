@@ -9,6 +9,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.get("/", (req, res) => {
+  res.send("Portfolio API running");
+});
+
 app.use("/api/chat", chatRoutes);
 app.use("/api/contact", contactRoutes);
 
