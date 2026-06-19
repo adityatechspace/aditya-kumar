@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect, } from "react";
 
 import MessageBubble from "./MessageBubble";
 import ChatInput from "./ChatInput";
@@ -15,6 +15,8 @@ function ChatBot() {
   ]);
 
   const [input, setInput] = useState("");
+  const [loading, setLoading] = useState(false);
+  const chatContainerRef = useRef(null);
 
   const handleSend = async () => {
 
@@ -33,7 +35,7 @@ function ChatBot() {
   setInput("");
 
   try {
-
+    setLoading(true);
     const data =
       await askAssistant(
         userMessage
@@ -58,14 +60,23 @@ function ChatBot() {
           "Unable to connect to AI Assistant.",
       },
     ]);
+  } finally {
+    setLoading(false);
   }
-};
+ };
 
   const handleSuggestedQuestion = (
     question
   ) => {
     setInput(question);
   };
+
+  useEffect(() => {
+  if (chatContainerRef.current) {
+    chatContainerRef.current.scrollTop =
+      chatContainerRef.current.scrollHeight;
+  }
+}, [messages, loading]);
 
   return (
     <section
@@ -99,8 +110,8 @@ function ChatBot() {
               }
             />
           </div>
-
-          <div className="space-y-4 h-[400px] overflow-y-auto mb-6">
+          
+          <div className="space-y-4 h-[400px] overflow-y-auto mb-6" ref={chatContainerRef}>
             {messages.map((msg, index) => (
               <MessageBubble
                 key={index}
@@ -108,6 +119,16 @@ function ChatBot() {
                 message={msg.message}
               />
             ))}
+
+            {loading && (
+  <div className="flex justify-start">
+    <div className="max-w-[80%] px-5 py-3 rounded-2xl bg-slate-800 text-slate-400">
+      <span className="typing">
+        Typing
+      </span>
+    </div>
+  </div>
+)}
           </div>
 
           <ChatInput
