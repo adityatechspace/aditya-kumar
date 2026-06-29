@@ -11,6 +11,12 @@ function ChatInput({
         type="text"
         value={value}
         onChange={onChange}
+        onKeyDown={(e) => {
+        if (e.key === "Enter") {
+        e.preventDefault();
+        onSend();
+    }
+  }}
         placeholder="Ask about my portfolio..."
         className="flex-1 bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 outline-none"
       />
