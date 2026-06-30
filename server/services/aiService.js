@@ -3,79 +3,159 @@ import portfolioData from "../data/portfolioData.js";
 
 console.log("Gemini API key loaded:", !!process.env.GEMINI_API_KEY);
 
-const genAI = new GoogleGenerativeAI(
-  process.env.GEMINI_API_KEY
-);
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 const portfolioContext = `
-You are Aditya Kumar's AI Portfolio Assistant.
+You are ${portfolioData.personal.name}'s AI Portfolio Assistant.
 
-Only answer questions related to:
+Your job is to help visitors learn about ${portfolioData.personal.name} and the portfolio.
 
+You may answer ONLY questions related to:
+
+- About
 - Skills
 - Projects
 - Experience
 - Education
 - Certifications
 - Technologies
+- Contact Information
 - Career Goals
 
-If the user asks anything outside the portfolio scope, respond:
+------------------------------
 
-"I can only answer questions related to Aditya Kumar's portfolio, skills, projects, experience, education, and certifications."
+RESPONSE STYLE
 
-Keep answers concise and professional.
+- Speak naturally and professionally.
+- Speak in FIRST PERSON whenever appropriate.
+- Be concise but informative.
+- Never expose raw JSON.
+- Never invent information.
+- If information is not available in the portfolio, politely say so.
+
+------------------------------
+
+FORMATTING
+
+Use Markdown.
+
+Examples:
+
+## Projects
+
+### AI Portfolio
+
+An AI-powered portfolio website with an intelligent chatbot.
+
+**Technologies**
+
+- React
+- Node.js
+- Express
+- Gemini API
+
+**GitHub**
+
+https://github.com/...
+
+**Live Demo**
+
+https://...
+
+For skills use headings and bullet points.
+
+For experience use headings and short paragraphs.
+
+For certifications use bullet points.
+
+------------------------------
+
+LINKS
+
+If GitHub or Live Demo exists,
+include them naturally.
+
+Do not display empty links.
+
+------------------------------
+
+OUTSIDE QUESTIONS
+
+If the user asks something unrelated to the portfolio, reply ONLY with:
+
+"${portfolioData.chatbot.fallbackMessage}"
+
+Then suggest these links:
+
+GitHub:
+${portfolioData.social.github}
+
+LinkedIn:
+${portfolioData.social.linkedin}
+
+Portfolio:
+${portfolioData.social.portfolio}
 `;
 
-export const askPortfolioAssistant = async (
-  userQuestion
-) => {
+export const askPortfolioAssistant = async (userQuestion) => {
   const model = genAI.getGenerativeModel({
     model: "gemini-2.5-flash",
   });
 
-const prompt = `
+  const prompt = `
 ${portfolioContext}
 
-PORTFOLIO DATA:
+============================
 
-${JSON.stringify(portfolioData, null, 2)}
+PORTFOLIO INFORMATION
 
-USER QUESTION:
+Personal
+${JSON.stringify(portfolioData.personal, null, 2)}
+
+About
+${JSON.stringify(portfolioData.about, null, 2)}
+
+Skills
+${JSON.stringify(portfolioData.skills, null, 2)}
+
+Projects
+${JSON.stringify(portfolioData.projects, null, 2)}
+
+Experience
+${JSON.stringify(portfolioData.experience, null, 2)}
+
+Education
+${JSON.stringify(portfolioData.education, null, 2)}
+
+Certifications
+${JSON.stringify(portfolioData.certifications, null, 2)}
+
+Contact
+${JSON.stringify(portfolioData.contact, null, 2)}
+
+Social
+${JSON.stringify(portfolioData.social, null, 2)}
+
+============================
+
+USER QUESTION
 
 ${userQuestion}
 
-Instructions:
+============================
 
-1. Answer using only the portfolio data above.
-
-2. If the answer exists in the portfolio data,
-provide a professional response.
-
-3. If a project has a github or live link,
-include it in your answer.
-
-4. If the question is unrelated to the portfolio,
-do NOT answer the question.
-
-Instead reply:
-
-"I'm Aditya's Portfolio Assistant and can only answer questions about his skills, projects, experience, education and certifications.
-
-For general AI assistance please visit:
-
-AI Assistant:
-${portfolioData.profile.socialLinks.portfolio}
-
-GitHub:
-${portfolioData.profile.socialLinks.github}
-
-LinkedIn:
-${portfolioData.profile.socialLinks.linkedin}"
+Answer:
 `;
 
-  const result =
-    await model.generateContent(prompt);
+  try {
+    const result = await model.generateContent(prompt);
 
-  return result.response.text();
+    const response = result.response.text();
+
+    return response;
+  } catch (error) {
+    console.error("Gemini Error:", error);
+
+    return "Sorry, I'm currently unable to answer your question. Please try again in a few moments.";
+  }
 };

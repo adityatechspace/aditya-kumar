@@ -10,5 +10,9 @@
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
+  },
+  "dependencies": {
+    "@tailwindcss/typography": "^0.5.20",
+    "react-markdown": "^10.1.0"
   }
 }
