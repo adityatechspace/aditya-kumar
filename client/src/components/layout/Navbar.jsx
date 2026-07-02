@@ -48,7 +48,7 @@ function Navbar() {
               className="flex items-center gap-3"
             >
               <div className="w-11 h-11 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center font-bold text-white shadow-lg shadow-blue-500/20">
-                AK
+                <img src="/favicon.png"/>
               </div>
 
               <div className="hidden sm:block">
@@ -57,7 +57,7 @@ function Navbar() {
                 </h1>
 
                 <p className="text-xs text-slate-500">
-                  AI Engineer
+                  Portfolio
                 </p>
               </div>
             </a>
