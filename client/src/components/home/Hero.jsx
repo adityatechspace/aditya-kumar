@@ -39,7 +39,7 @@ function Hero() {
 
   <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-6">
 
-    <span className="text-white">
+    <span className="text-blue-400">
       Aditya
     </span>
 

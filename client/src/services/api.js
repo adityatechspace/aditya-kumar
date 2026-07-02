@@ -16,3 +16,8 @@ export const askAssistant =
 
     return response.data;
   };
+
+  export const sendContactMessage = async (contactData) => {
+  const response = await API.post("/contact", contactData);
+  return response.data;
+};
