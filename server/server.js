@@ -1,10 +1,17 @@
 import dotenv from "dotenv";
 
+import { connectDB } from "./config/db.js";
+
+
 dotenv.config();
+
+
 
 const { default: app } = await import("./app.js");
 
 const PORT = process.env.PORT || 5000;
+
+connectDB();
 
 
 app.listen(PORT, () => {

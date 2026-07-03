@@ -1,24 +1,23 @@
+
+const personal = {
+    title: "Hi, I'm",
+    firstName: "Aditya",
+    secondName: "Kumar",
+    role: "AI engineer",
+    subtitle: ["Building AI-powered applications", "that solve real-world problems."],
+    description: "Passionate about building intelligent software, automation tools, and scalable full-stack applications using modern AI technologies.",
+    availability: "Available for opportunity",
+    techStack: ["Python", "React", "Node.js", "FastAPI", "Gemini AI"],
+    location: "Bengaluru, Karnataka-560064",
+    profilePicture: "profile-picture.png"
+  };
+
 const portfolioData = {
   // ==========================
   // PERSONAL INFORMATION
   // ==========================
 
-  personal: {
-    name: "Aditya Kumar",
-
-    role: "AI engineer",
-
-    tagline: "AI Operation",
-
-    bio: "AI engineer",
-
-    location: "Bengaluru, Karnataka-560064",
-
-    profileImage: "/profile.png",
-
-    resume: "/resume.pdf"
-  },
-
+  personal,
   // ==========================
   // CONTACT
   // ==========================
@@ -26,13 +25,9 @@ const portfolioData = {
   contact: {
     email: "adityaproinfo@gmail.com",
 
-    phone: "+91 8102256694",
-
-    availability: "",
-
-    timezone: ""
+    phone: "+91 8102256694"
   },
-
+  
   // ==========================
   // SOCIAL LINKS
   // ==========================
@@ -234,17 +229,28 @@ const portfolioData = {
   // HERO BUTTONS
   // ==========================
 
-  heroButtons: {
-    primary: {
+  buttons: {
+    project: {
       text: "View Projects",
 
       link: "#projects"
     },
 
-    secondary: {
-      text: "Download Resume",
+    resume: {
+      text: "Resume",
 
-      link: "/resume.pdf"
+      link: "/Aditya_Kumar_Resume.pdf"
+    },
+
+    contact: {
+      text: "Contact Me",
+      link: "#contact"
+    },
+
+    aiAssistant: {
+      text: "✨ AI Assistant",
+      link: "#ai-assistant",
+      popUp: "👋 Try my AI Portfolio Assistant"
     }
   },
 
@@ -252,22 +258,27 @@ const portfolioData = {
   // NAVIGATION
   // ==========================
 
-  navigation: [
-    "Home",
+  navigation: {
+    title: `${personal.firstName} ${personal.secondName}`,
+    subtitle : "Portfolio",
+    logo: "/favicon.png",
+    },
 
-    "About",
+  navLinks: [
+    {text: "Home", link: "home"},
 
-    "Skills",
+    {text: "About", link: "about"},
 
-    "Projects",
+    {text: "Skills", link: "skills"},
 
-    "Experience",
+    {text: "Projects", link: "projects"},
 
-    "Education",
+    {text: "Experience", link: "experience"},
 
-    "Contact"
-  ],
+    {text: "Education", link: "education"},
 
+    {text: "Contact", link: "contact"},
+   ],
   // ==========================
   // FOOTER
   // ==========================

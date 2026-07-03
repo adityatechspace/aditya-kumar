@@ -3,6 +3,7 @@ import cors from "cors";
 import chatRoutes from "./routes/chatRoutes.js";
 import contactRoutes from "./routes/contactRoutes.js";
 import errorHandler from "./middleware/errorHandler.js";
+import portfolioRoutes from "./routes/portfolioRoutes.js";
 
 const app = express();
 
@@ -38,6 +39,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/chat", chatRoutes);
 app.use("/api/contact", contactRoutes);
+app.use("/api/portfolio", portfolioRoutes);
 
 app.get("/api/health", (req, res) => {
   res.json({ success: true, message: "Backend is running" });

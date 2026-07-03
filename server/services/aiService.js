@@ -1,14 +1,31 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import portfolioData from "../data/portfolioData.js";
+import Portfolio from "../models/Portfolio.js";
 
 console.log("Gemini API key loaded:", !!process.env.GEMINI_API_KEY);
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
-const portfolioContext = `
-You are ${portfolioData.personal.name}'s AI Portfolio Assistant.
+export const askPortfolioAssistant = async (userQuestion) => {
+  // Load portfolio from database
+  let portfolioDoc;
 
-Your job is to help visitors learn about ${portfolioData.personal.name} and the portfolio.
+  try {
+    portfolioDoc = await Portfolio.findOne();
+  } catch (err) {
+    console.error("Error fetching portfolio from DB:", err.message);
+    throw new Error("Internal server error");
+  }
+
+  if (!portfolioDoc || !portfolioDoc.data) {
+    return "Sorry, portfolio data is not available right now.";
+  }
+
+  const portfolioData = portfolioDoc.data;
+
+  const portfolioContext = `
+You are ${portfolioData.personal?.name || "the portfolio owner's"}'s AI Portfolio Assistant.
+
+Your job is to help visitors learn about ${portfolioData.personal?.name || "the portfolio owner"} and the portfolio.
 
 You may answer ONLY questions related to:
 
@@ -39,68 +56,16 @@ FORMATTING
 
 Use Markdown.
 
-Examples:
-
-## Projects
-
-### AI Portfolio
-
-An AI-powered portfolio website with an intelligent chatbot.
-
-**Technologies**
-
-- React
-- Node.js
-- Express
-- Gemini API
-
-**GitHub**
-
-https://github.com/...
-
-**Live Demo**
-
-https://...
-
 For skills use headings and bullet points.
 
 For experience use headings and short paragraphs.
 
 For certifications use bullet points.
 
-------------------------------
-
-LINKS
-
-If GitHub or Live Demo exists,
-include them naturally.
-
-Do not display empty links.
-
-------------------------------
-
-OUTSIDE QUESTIONS
-
-If the user asks something unrelated to the portfolio, reply ONLY with:
-
-"${portfolioData.chatbot.fallbackMessage}"
-
-Then suggest these links:
-
-GitHub:
-${portfolioData.social.github}
-
-LinkedIn:
-${portfolioData.social.linkedin}
-
-Portfolio:
-${portfolioData.social.portfolio}
+If the user asks something unrelated to the portfolio, reply with the configured fallback message if present.
 `;
 
-export const askPortfolioAssistant = async (userQuestion) => {
-  const model = genAI.getGenerativeModel({
-    model: "gemini-2.5-flash",
-  });
+  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
   const prompt = `
 ${portfolioContext}
@@ -110,31 +75,31 @@ ${portfolioContext}
 PORTFOLIO INFORMATION
 
 Personal
-${JSON.stringify(portfolioData.personal, null, 2)}
+${JSON.stringify(portfolioData.personal || {}, null, 2)}
 
 About
-${JSON.stringify(portfolioData.about, null, 2)}
+${JSON.stringify(portfolioData.about || {}, null, 2)}
 
 Skills
-${JSON.stringify(portfolioData.skills, null, 2)}
+${JSON.stringify(portfolioData.skills || {}, null, 2)}
 
 Projects
-${JSON.stringify(portfolioData.projects, null, 2)}
+${JSON.stringify(portfolioData.projects || {}, null, 2)}
 
 Experience
-${JSON.stringify(portfolioData.experience, null, 2)}
+${JSON.stringify(portfolioData.experience || {}, null, 2)}
 
 Education
-${JSON.stringify(portfolioData.education, null, 2)}
+${JSON.stringify(portfolioData.education || {}, null, 2)}
 
 Certifications
-${JSON.stringify(portfolioData.certifications, null, 2)}
+${JSON.stringify(portfolioData.certifications || {}, null, 2)}
 
 Contact
-${JSON.stringify(portfolioData.contact, null, 2)}
+${JSON.stringify(portfolioData.contact || {}, null, 2)}
 
 Social
-${JSON.stringify(portfolioData.social, null, 2)}
+${JSON.stringify(portfolioData.social || {}, null, 2)}
 
 ============================
 
@@ -149,13 +114,10 @@ Answer:
 
   try {
     const result = await model.generateContent(prompt);
-
     const response = result.response.text();
-
     return response;
   } catch (error) {
     console.error("Gemini Error:", error);
-
     return "Sorry, I'm currently unable to answer your question. Please try again in a few moments.";
   }
 };

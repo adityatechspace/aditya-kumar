@@ -1,4 +1,3 @@
-import profilePicture from "../assets/profile-picture.png"
 import resume from "/Aditya_Kumar_Resume.pdf"
 import navLogo from "/favicon.png"
 
@@ -12,7 +11,7 @@ const personal = {
     availability: "Available for opportunity",
     techStack: ["Python", "React", "Node.js", "FastAPI", "Gemini AI"],
     location: "Bengaluru, Karnataka-560064",
-    profilePicture: profilePicture
+    profilePicture: "/profile-picture.png"
   };
 
 const portfolioData = {
