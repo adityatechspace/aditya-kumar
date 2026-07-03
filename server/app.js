@@ -6,13 +6,31 @@ import errorHandler from "./middleware/errorHandler.js";
 
 const app = express();
 
+const clientUrl = process.env.CLIENT_URL?.replace(/\/$/, "");
+
+const allowedOrigins = new Set([clientUrl].filter(Boolean));
+
 app.use(
   cors({
-    origin: process.env.CLIENT_URL,
+    origin: (origin, callback) => {
+      // allow non-browser requests (e.g., server-to-server)
+      if (!origin) return callback(null, true);
+
+      // Allow configured client URL or any Vite dev server origin on port 5173
+if (
+  allowedOrigins.has(origin) ||
+  /^http:\/\/localhost:\d+$/.test(origin) ||
+  /^http:\/\/172\.20\.\d+\.\d+:\d+$/.test(origin)
+) {        return callback(null, true);
+      }
+
+      return callback(new Error("Not allowed by CORS"));
+    },
     credentials: true,
   })
-  
-);app.use(express.json());
+);
+
+app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("Portfolio API running");
