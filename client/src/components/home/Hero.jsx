@@ -11,6 +11,7 @@ import {
 import portfolioData from "../../data/portfolioData" 
 
 function Hero(){ const {title, firstName, secondName, availability, role, subtitle, description, techStack = [], profilePicture, button } = portfolioData.personal;
+const {project, contact} = portfolioData.buttons;
   return (
     <section
       id="home"
@@ -87,17 +88,17 @@ function Hero(){ const {title, firstName, secondName, availability, role, subtit
   <div className="mt-12 flex flex-wrap items-center gap-6">
 
     <a
-      href="#contact"
+      href={contact.link}
       className="rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 px-8 py-4 font-semibold text-white transition duration-300 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/20"
     >
-      {button[0]}
+      {contact.text}
     </a>
 
     <a
-      href="#projects"
+      href={project.link}
       className="group flex items-center gap-2 text-lg font-medium text-slate-300 transition hover:text-white"
     >
-      {button[1]}
+      {project.text}
 
       <span className="transition-transform duration-300 group-hover:translate-x-2">
         →

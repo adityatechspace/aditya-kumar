@@ -8,21 +8,16 @@ import {
 } from "react-icons/fi";
 import { BsStars } from "react-icons/bs";
 import { useTheme } from "../../context/ThemeContext";
+import portfolioData from "../../data/portfolioData"
 
 function Navbar() {
   const { darkMode, toggleTheme } = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
   const [highlightAI, setHighlightAI] = useState(false);
 
-  const navLinks = [
-    "About",
-    "Skills",
-    "Projects",
-    "Experience",
-    "Education",
-    "Contact",
-  ];
-
+  const navLinks = portfolioData.navLinks;
+  const navigation = portfolioData.navigation;
+  const {resume, aiAssistant} = portfolioData.buttons;
 
 
   useEffect(() => {
@@ -52,16 +47,16 @@ function Navbar() {
               className="flex items-center gap-3"
             >
               <div className="w-11 h-11 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center font-bold text-white shadow-lg shadow-blue-500/20">
-                <img src="/favicon.png"/>
+                <img src= {navigation.logo} alt="Portfolio logo"/>
               </div>
 
               <div className="hidden sm:block">
                 <h1 className="font-semibold text-black dark:text-white">
-                  Aditya Kumar
+                  {navigation.title}
                 </h1>
 
                 <p className="text-xs text-slate-500">
-                  Portfolio
+                  {navigation.subtitle}
                 </p>
               </div>
             </a>
@@ -71,17 +66,17 @@ function Navbar() {
 
               {navLinks.map((item) => (
                 <a
-                  key={item}
-                  href={`#${item.toLowerCase().replace(/\s/g, "-")}`}
+                  key={item.text}
+                  href={`#${item.link}`}
                   className="relative text-sm font-medium text-slate-700 dark:text-slate-300 transition hover:text-blue-500 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all hover:after:w-full"
                 >
-                  {item}
+                  {item.text}
                 </a>
               ))}
 
               {/* AI Assistant */}
               <a
-  href="#ai-assistant"
+  href={aiAssistant.link}
   className={`group relative flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all duration-500
   ${
     highlightAI
@@ -89,11 +84,11 @@ function Navbar() {
       : "border border-violet-500/30 bg-gradient-to-r from-violet-500/10 to-blue-500/10 text-violet-300 hover:scale-105 hover:border-violet-400 hover:shadow-lg hover:shadow-violet-500/20"
   }`}
 >
-  ✨ AI Assistant
+  {aiAssistant.text}
 
   {highlightAI && (
     <span className="absolute -bottom-12 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-xs text-white shadow-xl">
-      👋 Try my AI Portfolio Assistant
+      {aiAssistant.popUp}
     </span>
   )}
 </a>
@@ -105,12 +100,12 @@ function Navbar() {
 
               {/* Resume */}
               <a
-                href="/resume.pdf"
+                href={resume.link}
                 download
                 className="hidden md:flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900/40 px-5 py-2 text-sm font-medium text-slate-200 transition-all duration-300 hover:border-blue-500 hover:bg-blue-500/10 hover:text-white"
               >
                 <FiDownload />
-                Resume
+                {resume.text}
               </a>
 
               {/* Theme */}
@@ -141,12 +136,12 @@ function Navbar() {
 
                 {navLinks.map((item) => (
                   <a
-                    key={item}
-                    href={`#${item.toLowerCase().replace(/\s/g, "-")}`}
+                    key={item.text}
+                    href={`#${item.link}`}
                     onClick={() => setMenuOpen(false)}
                     className="text-slate-300"
                   >
-                    {item}
+                    {item.text}
                   </a>
                 ))}
 

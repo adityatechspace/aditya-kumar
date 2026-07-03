@@ -1,33 +1,26 @@
 import profilePicture from "../assets/profile-picture.png"
+import resume from "/Aditya_Kumar_Resume.pdf"
+import navLogo from "/favicon.png"
+
+const personal = {
+    title: "Hi, I'm",
+    firstName: "Aditya",
+    secondName: "Kumar",
+    role: "AI engineer",
+    subtitle: ["Building AI-powered applications", "that solve real-world problems."],
+    description: "Passionate about building intelligent software, automation tools, and scalable full-stack applications using modern AI technologies.",
+    availability: "Available for opportunity",
+    techStack: ["Python", "React", "Node.js", "FastAPI", "Gemini AI"],
+    location: "Bengaluru, Karnataka-560064",
+    profilePicture: profilePicture
+  };
+
 const portfolioData = {
   // ==========================
   // PERSONAL INFORMATION
   // ==========================
 
-  personal: {
-    title: "Hi, I'm",
-
-    firstName: "Aditya",
-
-    secondName: "Kumar",
-
-    role: "AI engineer",
-
-    subtitle: ["Building AI-powered applications", "that solve real-world problems.",],
-
-    description: "Passionate about building intelligent software, automation tools, and scalable full-stack applications using modern AI technologies.",
-
-    availability: "Available for opportunity",
-
-    techStack: ["Python", "React", "Node.js", "FastAPI", "Gemini AI"],
-
-    location: "Bengaluru, Karnataka-560064",
-
-    profilePicture: profilePicture,
-
-    button: ["Contact Me","View Projects"]
-  },
-
+  personal,
   // ==========================
   // CONTACT
   // ==========================
@@ -37,15 +30,7 @@ const portfolioData = {
 
     phone: "+91 8102256694"
   },
-
-   //==========================
-   // Documents
-   //==========================
-
-   document: {
-     resume: ""
-   },
-
+  
   // ==========================
   // SOCIAL LINKS
   // ==========================
@@ -247,17 +232,28 @@ const portfolioData = {
   // HERO BUTTONS
   // ==========================
 
-  heroButtons: {
-    primary: {
+  buttons: {
+    project: {
       text: "View Projects",
 
       link: "#projects"
     },
 
-    secondary: {
-      text: "Download Resume",
+    resume: {
+      text: "Resume",
 
-      link: "/resume.pdf"
+      link: resume
+    },
+
+    contact: {
+      text: "Contact Me",
+      link: "#contact"
+    },
+
+    aiAssistant: {
+      text: "✨ AI Assistant",
+      link: "#ai-assistant",
+      popUp: "👋 Try my AI Portfolio Assistant"
     }
   },
 
@@ -265,22 +261,27 @@ const portfolioData = {
   // NAVIGATION
   // ==========================
 
-  navigation: [
-    "Home",
+  navigation: {
+    title: `${personal.firstName} ${personal.secondName}`,
+    subtitle : "Portfolio",
+    logo: navLogo,
+    },
 
-    "About",
+  navLinks: [
+    {text: "Home", link: "home"},
 
-    "Skills",
+    {text: "About", link: "about"},
 
-    "Projects",
+    {text: "Skills", link: "skills"},
 
-    "Experience",
+    {text: "Projects", link: "projects"},
 
-    "Education",
+    {text: "Experience", link: "experience"},
 
-    "Contact"
-  ],
+    {text: "Education", link: "education"},
 
+    {text: "Contact", link: "contact"},
+   ],
   // ==========================
   // FOOTER
   // ==========================
