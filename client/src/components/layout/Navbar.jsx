@@ -116,34 +116,32 @@ function Navbar() {
                 {darkMode ? <FiSun /> : <FiMoon />}
               </button>
 
-              {/* Mobile Menu */}
-              <button
-                className="lg:hidden w-11 h-11 rounded-full border border-slate-700 flex items-center justify-center"
-                onClick={() => setMenuOpen(!menuOpen)}
-              >
-                {menuOpen ? <FiX size={22} /> : <FiMenu size={22} />}
-              </button>
+             {/* Mobile Menu */}
+<button
+  className="lg:hidden w-11 h-11 rounded-full border border-slate-700 flex items-center justify-center"
+  onClick={() => setMenuOpen(!menuOpen)}
+>
+  {menuOpen ? <FiX size={22} /> : <FiMenu size={22} />}
+</button>
 
-            </div>
+</div>
 
-          </div>
+</div>
 
-          {/* Mobile Menu */}
-          {menuOpen && (
-            <div className="lg:hidden border-t border-slate-800">
-
-              <div className="flex flex-col gap-5 p-6">
-
-                {navLinks.map((item) => (
-                  <a
-                    key={item.text}
-                    href={`#${item.link}`}
-                    onClick={() => setMenuOpen(false)}
-                    className="text-slate-300"
-                  >
-                    {item.text}
-                  </a>
-                ))}
+{/* Mobile Menu */}
+{menuOpen && (
+  <div className="absolute top-[calc(100%+0.75rem)] left-0 w-full lg:hidden overflow-hidden rounded-3xl border border-slate-800 bg-slate-950/95 shadow-2xl backdrop-blur-xl">
+    <div className="flex flex-col gap-2 p-5">
+      {navLinks.map((item) => (
+        <a
+          key={item.text}
+          href={`#${item.link}`}
+          onClick={() => setMenuOpen(false)}
+          className="rounded-xl px-4 py-3 text-sm font-medium text-slate-200 transition hover:bg-slate-800 hover:text-white"
+        >
+          {item.text}
+        </a>
+      ))}
 
               
               </div>
