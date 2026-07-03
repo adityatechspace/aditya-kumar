@@ -145,22 +145,7 @@ function Navbar() {
                   </a>
                 ))}
 
-                <a
-                  href="#ai-assistant"
-                  className="rounded-xl border border-violet-500 bg-violet-500/10 px-4 py-3 text-violet-300"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  ✨ AI Assistant
-                </a>
-
-                <a
-                  href="/resume.pdf"
-                  download
-                  className="rounded-xl border border-slate-700 px-4 py-3"
-                >
-                  ⬇ Download Resume
-                </a>
-
+              
               </div>
 
             </div>
