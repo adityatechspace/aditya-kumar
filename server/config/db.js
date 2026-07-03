@@ -27,21 +27,8 @@ export const connectDB = async () => {
         setTimeout(tryConnect, RETRY_DELAY_MS);
       } else {
         console.error(
-          "Reached max MongoDB connection attempts. The server will continue running without a DB connection and will keep retrying in the background."
+          "Reached max MongoDB connection attempts. The server will not retry automatically anymore."
         );
-
-        // Start background retries indefinitely, but don't exit the process
-        setInterval(async () => {
-          try {
-            await mongoose.connect(process.env.MONGODB_URI, {
-              useNewUrlParser: true,
-              useUnifiedTopology: true,
-            });
-            console.log("MongoDB connected successfully (background retry)");
-          } catch (err) {
-            console.error("Background retry failed:", err.message);
-          }
-        }, RETRY_DELAY_MS);
       }
     }
   };
