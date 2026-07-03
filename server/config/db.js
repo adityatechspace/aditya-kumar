@@ -8,11 +8,7 @@ export const connectDB = async () => {
 
   const tryConnect = async () => {
     try {
-      await mongoose.connect(process.env.MONGODB_URI, {
-        // Mongoose v6+ uses these options by default, but leaving them explicit
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      });
+      await mongoose.connect(process.env.MONGODB_URI);
 
       console.log("MongoDB connected successfully");
     } catch (error) {
