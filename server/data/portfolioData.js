@@ -101,22 +101,54 @@ const portfolioData = {
   // ==========================
 
   skills: {
-    frontend: ["HTML", "CSS", "React"],
+  title: "Skills",
+  subtitle: "Technical Expertise",
+  description:
+    "Technologies, frameworks, and tools I use to build modern applications.",
 
-    backend: ["Node"],
-
-    database: ["MySQL", "MongoDB"],
-
-    programming: ["Javascript", "Python"],
-
-    ai: ["Agentic AI"],
-
-    devops: [],
-
-    tools: ["Jypiter", "VS Code", "rander", "Vercel"],
-
-    softSkills: ["Professional Communication", "Ethical"]
-  },
+  sections: [
+    {
+      title: "Frontend Development",
+      technologies: ["React", "JavaScript", "Tailwind CSS", "HTML", "CSS"],
+      level: 95,
+    },
+    {
+      title: "Backend Development",
+      technologies: ["Node.js", "Express.js", "REST APIs"],
+      level: 90,
+    },
+    {
+      title: "Database",
+      technologies: ["MongoDB", "MongoDB Atlas"],
+      level: 85,
+    },
+    {
+      title: "Programming Languages",
+      technologies: ["Python", "JavaScript"],
+      level: 90,
+    },
+    {
+      title: "Artificial Intelligence",
+      technologies: ["LLM", "Gemini API", "Prompt Engineering"],
+      level: 88,
+    },
+    {
+      title: "DevOps & Cloud",
+      technologies: ["Vercel", "Render", "GitHub"],
+      level: 80,
+    },
+    {
+      title: "Tools & Platforms",
+      technologies: ["Git", "VS Code", "Postman", "Jupyter Notebook"],
+      level: 82,
+    },
+    {
+      title: "Soft Skills",
+      technologies: ["Problem Solving", "Communication", "Teamwork"],
+      level: 84,
+    },
+  ],
+},
 
   // ==========================
   // EXPERIENCE
@@ -157,22 +189,25 @@ const portfolioData = {
   // EDUCATION
   // ==========================
 
-  education: [
+  education: {
+  section: {
+    title: "Education",
+    subtitle: "Academic Background",
+    description:
+      "My academic journey and the foundation that helped me reach this milestone.",
+  },
+
+  data: [
     {
-      degree: "Bachelors of Computer Applications",
-
+      logo: "/chandigarh-university.png",
+      degree: "Bachelor of Computer Applications",
       institution: "Chandigarh University",
-
-      location: "Punjab",
-
+      location: "Punjab, India",
       duration: "2022 - 2025",
-
       cgpa: "8.50",
-
-      logo: ""
-    }
+    },
   ],
-
+},
   // ==========================
   // CERTIFICATIONS
   // ==========================
