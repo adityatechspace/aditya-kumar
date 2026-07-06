@@ -94,7 +94,7 @@ const portfolioData = {
     {
       company: "Kriya NextWealth Pvt. Ltd.",
 
-      logo: "",
+      logo: "/kriya-nextwealth.png",
 
       role: "process Associate",
 

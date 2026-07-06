@@ -4,31 +4,33 @@ const MAX_RETRIES = 5;
 const RETRY_DELAY_MS = 5000;
 
 export const connectDB = async () => {
+  if (!process.env.MONGODB_URI) {
+    console.warn("MONGODB_URI is not configured. Server will continue with fallback data only.");
+    return false;
+  }
+
   let attempts = 0;
 
-  const tryConnect = async () => {
+  while (attempts < MAX_RETRIES) {
     try {
-      await mongoose.connect(process.env.MONGODB_URI);
+      await mongoose.connect(process.env.MONGODB_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      });
 
       console.log("MongoDB connected successfully");
+      return true;
     } catch (error) {
       attempts += 1;
-      console.error(
-        `MongoDB connection failed (attempt ${attempts}):`,
-        error.message
-      );
+      console.error(`MongoDB connection failed (attempt ${attempts}):`, error.message);
 
       if (attempts < MAX_RETRIES) {
         console.log(`Retrying MongoDB connection in ${RETRY_DELAY_MS / 1000}s...`);
-        setTimeout(tryConnect, RETRY_DELAY_MS);
-      } else {
-        console.error(
-          "Reached max MongoDB connection attempts. The server will not retry automatically anymore."
-        );
+        await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY_MS));
       }
     }
-  };
+  }
 
-  // Kick off the first attempt (do not await here so server can start)
-  tryConnect();
+  console.error("Failed to connect to MongoDB after multiple attempts. Server will continue with fallback data only.");
+  return false;
 };

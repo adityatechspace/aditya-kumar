@@ -8,7 +8,13 @@ import {
 import { FaReact, FaNodeJs } from "react-icons/fa";
 import { RiTailwindCssFill } from "react-icons/ri";
 
-function Footer() {
+function Footer({ personal = {}, footer = {} }) {
+  const name = personal.firstName && personal.secondName ? `${personal.firstName} ${personal.secondName}` : "Aditya Kumar";
+  const subtitle = footer.subtitle || "AI Engineer Portfolio";
+  const description = footer.description ||
+    "Building AI-powered applications, scalable full-stack solutions, and modern web experiences using Python, React, Node.js and LLMs.";
+  const copyrightText = footer.copyright || "© 2026 Aditya Kumar. All Rights Reserved.";
+
   return (
    <footer className="border-t border-slate-800 py-10">
   <div className="max-w-7xl mx-auto px-6">
@@ -19,16 +25,15 @@ function Footer() {
       {/* Left */}
       <div>
         <h3 className="text-2xl font-bold text-white">
-          Aditya Kumar
+          {name}
         </h3>
 
         <p className="mt-2 text-blue-400 font-medium">
-          AI Engineer Portfolio
+          {subtitle}
         </p>
 
         <p className="mt-4 max-w-md text-slate-400 leading-relaxed">
-          Building AI-powered applications, scalable full-stack solutions,
-          and modern web experiences using Python, React, Node.js and LLMs.
+          {description}
         </p>
 
         <div className="mt-8">

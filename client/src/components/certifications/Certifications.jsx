@@ -1,5 +1,13 @@
-function Certifications() {
-  const certifications = [1, 2, 3, 4];
+function Certifications({ certifications = [] }) {
+  const certificationItems = certifications.length
+    ? certifications
+    : [
+        {
+          title: "AI based Fraud Detection Model",
+          issuer: "Intel",
+          year: "2025",
+        },
+      ];
 
   return (
     <section id="certifications" className="py-32">
@@ -83,18 +91,24 @@ Continuous Learning
 </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {certifications.map((item) => (
+          {certificationItems.map((item, index) => (
             <div
-              key={item}
+              key={item.title || index}
               className="border border-slate-800 rounded-2xl p-6"
             >
               <h3 className="font-semibold mb-2">
-                Certificate Placeholder
+                {item.title || "Certificate"}
               </h3>
 
               <p className="text-slate-400 text-sm">
-                Provider Placeholder
+                {item.issuer || item.provider || "Issuer not available"}
               </p>
+
+              {item.year ? (
+                <p className="text-slate-500 text-xs mt-2">
+                  {item.year}
+                </p>
+              ) : null}
             </div>
           ))}
         </div>

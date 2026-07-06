@@ -1,8 +1,10 @@
 function SkillCard({
   title,
   level,
-  technologies,
+  technologies = [],
 }) {
+  const progress = Number(level) || 0;
+
   return (
     <div className="bg-slate-950 border border-slate-800 rounded-2xl p-6 hover:border-blue-500/40 transition-all duration-300">
       
@@ -12,7 +14,7 @@ function SkillCard({
         </h3>
 
         <span className="text-blue-400 font-medium">
-          {level}%
+          {level !== undefined ? `${progress}%` : ""}
         </span>
       </div>
 
@@ -20,7 +22,7 @@ function SkillCard({
         <div
           className="h-full bg-gradient-to-r from-blue-500 to-purple-500"
           style={{
-            width: `${level}%`,
+            width: `${progress}%`,
           }}
         />
       </div>

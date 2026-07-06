@@ -10,6 +10,7 @@ const app = express();
 const clientUrl = process.env.CLIENT_URL?.replace(/\/$/, "");
 
 const allowedOrigins = new Set([clientUrl].filter(Boolean));
+const localDevOriginRegex = /^http:\/\/(localhost|127\.0\.0\.1|192\.168\.\d+\.\d+|172\.(?:1[6-9]|2\d|3[0-1])\.\d+\.\d+):\d+$/;
 
 app.use(
   cors({
@@ -17,12 +18,9 @@ app.use(
       // allow non-browser requests (e.g., server-to-server)
       if (!origin) return callback(null, true);
 
-      // Allow configured client URL or any Vite dev server origin on port 5173
-if (
-  allowedOrigins.has(origin) ||
-  /^http:\/\/localhost:\d+$/.test(origin) ||
-  /^http:\/\/172\.20\.\d+\.\d+:\d+$/.test(origin)
-) {        return callback(null, true);
+      // Allow configured client URL or common local/dev origins
+      if (allowedOrigins.has(origin) || localDevOriginRegex.test(origin)) {
+        return callback(null, true);
       }
 
       return callback(new Error("Not allowed by CORS"));

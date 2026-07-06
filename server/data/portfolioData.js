@@ -33,17 +33,9 @@ const portfolioData = {
   // ==========================
 
   social: {
-    github: "",
+    github: "https://github.com/adityatechspace",
 
-    linkedin: "",
-
-    twitter: "",
-
-    leetcode: "",
-
-    hackerrank: "",
-
-    portfolio: ""
+    linkedin: "https://www.linkedin.com/in/go-on-adityakumar",
   },
 
   // ==========================
@@ -51,17 +43,59 @@ const portfolioData = {
   // ==========================
 
   about: {
-    title: "About Me",
+  title: "About Me",
+  subtitle: "My Journey",
 
-    paragraphs: [
-      "",
+  paragraphs: [
+    "I am Aditya Kumar, a developer with experience in AI operations, language data, and full-stack web development. I enjoy building practical applications that combine clean user experiences with reliable backend systems.",
 
-      "",
+    "My journey began with programming fundamentals and gradually expanded into React, Node.js, Express, Python, databases, and AI-powered applications. I focus on learning by building projects and improving them step by step.",
 
-      ""
-    ]
-  },
+    "Currently, I am developing my skills as a Python full-stack developer while working with AI data and language-focused workflows. My goal is to build useful, scalable products that solve real-world problems."
+  ],
 
+  roadmap: [
+    {
+      year: "2022",
+      title: "Started Programming Journey",
+      description:
+        "Built strong foundations in programming, problem solving, and software development.",
+      icon: "book"
+    },
+
+    {
+      year: "2023",
+      title: "Full Stack Development",
+      description:
+        "Learned React, Node.js, Express, and modern web application architecture.",
+      icon: "code"
+    },
+
+    {
+      year: "2024",
+      title: "AI & Machine Learning",
+      description:
+        "Worked on AI-powered solutions, automation systems, and intelligent applications.",
+      icon: "cpu"
+    },
+
+    {
+      year: "2025",
+      title: "AI Language Expert",
+      description:
+        "Started my first full-time role at OLA Krutrim, working with multilingual AI training data and language-model quality.",
+      icon: "award"
+    },
+
+    {
+      year: "2026",
+      title: "AI Operations & Full-Stack Growth",
+      description:
+        "Joined Kriya NextWealth in AI Operations while continuing to build full-stack and AI-powered portfolio projects.",
+      icon: "briefcase"
+    }
+  ]
+},
   // ==========================
   // SKILLS
   // ==========================
@@ -91,25 +125,30 @@ const portfolioData = {
   experience: [
     {
       company: "Kriya NextWealth Pvt. Ltd.",
-
-      logo: "",
-
+      logo: "/kriya-nextwealth.png",
       role: "process Associate",
-
-      duration: "Present",
-
+      duration: "March 2026 - Present",
       location: "Bengaluru",
-
       type: "Full Time",
-
-      description: "",
-
+      description: "I got oppootrunity from Kriya after a huge covovery from my health, which caused me to leave my previous job from OLA.",
       responsibilities: [
-        "",
+        "Working on AI data to clean the data and make it usable for AI models.",
 
-        ""
+        "Follow the client's requirements, give useful impact to as per daily insights of the client side and provide reliable outcomes."
       ],
+      technologies: ["Python", "LLM", "Language Expert"]
+    },
 
+        {
+      company: "OLA Krutrim",
+      logo: ["/ola.png", "krutrim-logo.avif"],
+      role: "AI language expert",
+      duration: "March 2025 - July 2025",
+      location: "Bengaluru",
+      type: "Full Time",
+      description: "This was very first full time job of my entire life. I was so happy to be placed very soon before my college final exam.",
+      responsibilities: ["To train AI model from the provided data of defferent languages", "Making sure AI model can understand the human language and nural network."
+      ],
       technologies: ["Python", "LLM", "Language Expert"]
     }
   ],
@@ -189,7 +228,7 @@ const portfolioData = {
 
   services: [
     {
-      title: "",
+      title: "Website Building",
 
       description: "",
 
@@ -312,7 +351,7 @@ const portfolioData = {
       "Hey there! How can help you today?",
 
     fallbackMessage:
-      "Opps, I can't answer out of this portfolio",
+      "Opps, I can't answer out of this portfolio.",
 
     personality:
       "Friendly, professional and concise."

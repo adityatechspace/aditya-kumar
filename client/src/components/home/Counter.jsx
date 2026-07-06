@@ -13,33 +13,33 @@ const CountUp =
     ? CountUpLib.default
     : CountUpLib;
 
-function Counter() {
+function Counter({ stats = {} }) {
   const { ref, inView } = useInView({
     triggerOnce: false,
     threshold: 0.4,
   });
 
-  const stats = [
+  const statItems = [
     {
-      number: 47,
+      number: stats.projects ?? 0,
       suffix: "+",
       label: "Projects Built",
       icon: <FaCode />,
     },
     {
-      number: 23,
+      number: stats.certifications ?? 0,
       suffix: "+",
-      label: "Technologies",
+      label: "Certifications",
       icon: <FaLaptopCode />,
     },
     {
-      number: 6,
+      number: stats.technologies ?? 0,
       suffix: "+",
-      label: "AI Applications",
+      label: "Technologies",
       icon: <FaRobot />,
     },
     {
-      number: 3,
+      number: stats.experience ?? 0,
       suffix: "+",
       label: "Years Learning",
       icon: <FaChartLine />,
@@ -137,7 +137,7 @@ function Counter() {
 
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
 
-          {stats.map((item, index) => (
+          {statItems.map((item, index) => (
             <div
               key={index}
               className="

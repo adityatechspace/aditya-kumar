@@ -1,21 +1,23 @@
-function Experience() {
-  const experiences = [
-    {
-      role: "Process Associate - AI",
-      company: "Kriya NextWealth",
-      duration: "2026 March - Present",
-      description:
-        "Lingust"
-    },
-
-    {
-      role: "AI Language Model Developer",
-      company: "OLA Krutrim",
-      duration: "March 2025 - July 2025",
-      description:
-        "AI Developer."
-    },
-  ];
+function Experience({ experience = [] }) {
+  const experiences = experience.length
+    ? experience
+    : [
+        {
+          company: "Kriya NextWealth Pvt. Ltd.",
+          logo: "/kriya-nextwealth.png",
+          role: "Process Associate",
+          duration: "March 2026 - Present",
+          location: "Bengaluru",
+          type: "Full Time",
+          description:
+            "Working with AI data operations and helping build reliable client-facing models.",
+          responsibilities: [
+            "Manage AI data cleanup and transformation.",
+            "Support daily insights and client deliverables.",
+          ],
+          technologies: ["Python", "LLM", "Data Operations"],
+        },
+      ];
 
   return (
     <section
@@ -104,34 +106,84 @@ What I've Been Working On
 
 </div>
 
-        <div className="space-y-8">
-          {experiences.map((item, index) => (
-            <div
-              key={index}
-              className="bg-slate-900 border border-slate-800 rounded-2xl p-8"
-            >
-              <div className="flex justify-between flex-wrap gap-4">
-                <div>
-                  <h3 className="text-2xl font-semibold">
-                    {item.role}
-                  </h3>
-
-                  <p className="text-blue-400">
-                    {item.company}
-                  </p>
+       <div className="space-y-8">
+  {experiences.map((item, index) => (
+    <div
+      key={index}
+      className="rounded-2xl border border-slate-800 bg-slate-900 p-8"
+    >
+      <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+        <div className="flex items-center gap-4">
+          {/* Company logo / logos */}
+          <div className="flex shrink-0 items-center gap-2">
+            {Array.isArray(item.logo) ? (
+              item.logo.map((logo, logoIndex) => (
+                <div
+                  key={logoIndex}
+                  className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-xl border border-slate-700 bg-white p-2"
+                >
+                  <img
+                    src={logo}
+                    alt={`${item.company} logo ${logoIndex + 1}`}
+                    className="h-full w-full object-contain"
+                  />
                 </div>
-
-                <span className="text-slate-400">
-                  {item.duration}
-                </span>
+              ))
+            ) : (
+              <div className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-xl border border-slate-700 bg-white p-2">
+                <img
+                  src={item.logo}
+                  alt={`${item.company} logo`}
+                  className="h-full w-full object-contain"
+                />
               </div>
+            )}
+          </div>
 
-              <p className="text-slate-400 mt-4">
-                {item.description}
-              </p>
-            </div>
-          ))}
+          {/* Role and company */}
+          <div>
+            <h3 className="text-2xl font-semibold text-white">
+              {item.role}
+            </h3>
+
+            <p className="mt-1 text-blue-400">
+              {item.company}
+            </p>
+
+            <p className="mt-1 text-sm text-slate-400">
+              {item.location} · {item.type}
+            </p>
+          </div>
         </div>
+
+        <span className="text-sm text-slate-400 sm:text-right">
+          {item.duration}
+        </span>
+      </div>
+
+      <p className="mt-5 text-slate-400">
+        {item.description}
+      </p>
+
+      <ul className="mt-5 list-inside list-disc space-y-2 text-slate-400">
+        {(item.responsibilities || []).map((responsibility, responsibilityIndex) => (
+          <li key={responsibilityIndex}>{responsibility}</li>
+        ))}
+      </ul>
+
+      <div className="mt-6 flex flex-wrap gap-2">
+        {(item.technologies || []).map((technology) => (
+          <span
+            key={technology}
+            className="rounded-full border border-slate-700 bg-slate-800 px-3 py-1 text-sm text-slate-300"
+          >
+            {technology}
+          </span>
+        ))}
+      </div>
+    </div>
+  ))}
+</div>
 
       </div>
     </section>

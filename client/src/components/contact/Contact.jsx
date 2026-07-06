@@ -1,6 +1,8 @@
 import ContactForm from "./contactForm";
 
-function Contact() {
+function Contact({ contact = {} }) {
+  const { email, phone } = contact;
+
   return (
     <section id="contact" className="py-32">
       <div className="max-w-6xl mx-auto px-6">
@@ -72,7 +74,39 @@ Let's Build Something Together
 
 </div>
 
-        <ContactForm />
+        <div className="grid gap-10 lg:grid-cols-[1.25fr_0.75fr]">
+          <ContactForm />
+
+          <div className="rounded-3xl border border-slate-800 bg-slate-900 p-8">
+            <h3 className="text-2xl font-semibold text-white mb-4">
+              Contact Details
+            </h3>
+
+            {email ? (
+              <p className="text-slate-400 mb-3">
+                <span className="font-medium text-blue-400">Email:</span>{" "}
+                <a
+                  href={`mailto:${email}`}
+                  className="text-white hover:text-blue-400"
+                >
+                  {email}
+                </a>
+              </p>
+            ) : null}
+
+            {phone ? (
+              <p className="text-slate-400">
+                <span className="font-medium text-blue-400">Phone:</span>{" "}
+                <a
+                  href={`tel:${phone}`}
+                  className="text-white hover:text-blue-400"
+                >
+                  {phone}
+                </a>
+              </p>
+            ) : null}
+          </div>
+        </div>
       </div>
     </section>
   );

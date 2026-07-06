@@ -8,10 +8,19 @@ import {
     FaLinkedin,
 } from "react-icons/fa";
 
-import portfolioData from "../../data/portfolioData" 
-
-function Hero(){ const {title, firstName, secondName, availability, role, subtitle, description, techStack = [], profilePicture, button } = portfolioData.personal;
-const {project, contact} = portfolioData.buttons;
+function Hero({ personal, buttons }) {
+  const {
+    title,
+    firstName,
+    secondName,
+    availability,
+    role,
+    subtitle = [],
+    description,
+    techStack = [],
+    profilePicture,
+  } = personal || {};
+  const { project, contact } = buttons || {};
   return (
     <section
       id="home"

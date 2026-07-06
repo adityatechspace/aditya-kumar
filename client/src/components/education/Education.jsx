@@ -1,4 +1,18 @@
-function Education() {
+function Education({ education = [] }) {
+  const educationItems = education.length
+    ? education
+    : [
+        {
+          degree: "Bachelor of Computer Application (BCA)",
+          institution: "Chandigarh University",
+          location: "Punjab, India",
+          duration: "2022 - 2025",
+          cgpa: "8.50",
+          description:
+            "Completed Bachelor of Computer Application with a focus on software development and AI-powered systems.",
+        },
+      ];
+
   return (
     <section id="education" className="py-32">
       <div className="max-w-6xl mx-auto px-6">
@@ -80,18 +94,37 @@ Academic Background
 
 </div>
 
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-8">
-          <h3 className="text-2xl font-semibold">
-            Bachelor of Computer Application (BCA) - 2022 to 2025
-          </h3>
+        <div className="space-y-8">
+          {educationItems.map((item, index) => (
+            <div
+              key={item.degree || item.institution || index}
+              className="bg-slate-900 border border-slate-800 rounded-2xl p-8"
+            >
+              <h3 className="text-2xl font-semibold">
+                {item.degree}
+              </h3>
 
-          <p className="text-blue-400 mt-2">
-            Chandigarh University, Punjab, India
-          </p>
+              <p className="text-blue-400 mt-2">
+                {item.institution}
+              </p>
 
-          <p className="text-slate-400 mt-4">
-            Completed Bachelor of Computer Application (BCA) degree, focusing on software development, programming languages, and computer systems. Gaining practical experience through projects and coursework.
-          </p>
+              <p className="text-slate-400 mt-3">
+                {item.location} · {item.duration}
+              </p>
+
+              {item.cgpa && (
+                <p className="text-slate-500 mt-3">
+                  CGPA: {item.cgpa}
+                </p>
+              )}
+
+              {item.description && (
+                <p className="text-slate-400 mt-4">
+                  {item.description}
+                </p>
+              )}
+            </div>
+          ))}
         </div>
 
       </div>

@@ -3,7 +3,15 @@ import GitHubCalendarLib from "react-github-calendar";
 // Handle both ESM and CommonJS default export shapes
 const GitHubCalendar = GitHubCalendarLib && GitHubCalendarLib.default ? GitHubCalendarLib.default : GitHubCalendarLib;
 
-function GithubGraph() {
+function GithubGraph({ githubUrl }) {
+  const githubUsername = githubUrl
+    ? githubUrl
+        .replace(/\/?$/, "")
+        .split("/")
+        .filter(Boolean)
+        .pop()
+    : "adityatechspace";
+
   return (
     <section
       id="github"
@@ -91,7 +99,7 @@ Contribution Graph
 
         <div className="bg-slate-900 border border-slate-800 rounded-2xl p-8 overflow-x-auto">
           <GitHubCalendar
-            username="adityatechspace"
+            username={githubUsername}
           />
         </div>
 

@@ -1,7 +1,6 @@
 import ProjectCard from "./ProjectCard";
-import portfolioData from "../../data/portfolioData";
 
-function Projects() {
+function Projects({ projects = [] }) {
   return (
     <section
       id="projects"
@@ -88,11 +87,8 @@ function Projects() {
 </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
-         {portfolioData.projects.map((project) => (
-            <ProjectCard
-              key={project.title}
-              {...project}
-            />
+          {projects.map((project) => (
+            <ProjectCard key={project.title} {...project} />
           ))}
         </div>
       </div>

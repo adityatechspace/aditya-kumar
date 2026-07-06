@@ -1,5 +1,23 @@
-function Testimonials() {
-  const testimonials = [1, 2, 3];
+function Testimonials({ testimonials = [] }) {
+  const testimonialItems = testimonials.length
+    ? testimonials
+    : [
+        {
+          name: "John Doe",
+          position: "Client",
+          quote: "Testimonial will be added later.",
+        },
+        {
+          name: "Jane Smith",
+          position: "Team Lead",
+          quote: "Testimonial will be added later.",
+        },
+        {
+          name: "Alex Johnson",
+          position: "Peer",
+          quote: "Testimonial will be added later.",
+        },
+      ];
 
   return (
     <section id="testimonials" className="py-32">
@@ -84,22 +102,22 @@ What People Say
 </div>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {testimonials.map((item) => (
+          {testimonialItems.map((item, index) => (
             <div
-              key={item}
+              key={item.name || index}
               className="bg-slate-900 border border-slate-800 rounded-2xl p-6"
             >
               <p className="text-slate-400 mb-6">
-                Testimonial will be added later.
+                {item.quote || "No testimonial content available."}
               </p>
 
               <div>
                 <h3 className="font-semibold">
-                  Name Placeholder
+                  {item.name || "Anonymous"}
                 </h3>
 
                 <p className="text-sm text-blue-400">
-                  Position Placeholder
+                  {item.position || item.role || "Contributor"}
                 </p>
               </div>
             </div>

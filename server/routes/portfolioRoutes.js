@@ -1,5 +1,6 @@
 import express from "express";
 import Portfolio from "../models/Portfolio.js";
+import fallbackPortfolio from "../data/portfolioData.js";
 
 const router = express.Router();
 
@@ -8,9 +9,11 @@ router.get("/", async (req, res) => {
     const portfolio = await Portfolio.findOne();
 
     if (!portfolio) {
-      return res.status(404).json({
-        success: false,
-        message: "Portfolio data not found",
+      console.warn("Portfolio document not found in database; returning fallback portfolio data.");
+      return res.status(200).json({
+        success: true,
+        portfolioData: fallbackPortfolio,
+        message: "Using fallback portfolio data because the database document is missing.",
       });
     }
 
@@ -20,10 +23,10 @@ router.get("/", async (req, res) => {
     });
   } catch (error) {
     console.error("Portfolio fetch error:", error);
-
-    return res.status(500).json({
-      success: false,
-      message: "Could not load portfolio data",
+    return res.status(200).json({
+      success: true,
+      portfolioData: fallbackPortfolio,
+      message: "Using fallback portfolio data because database access failed.",
     });
   }
 });

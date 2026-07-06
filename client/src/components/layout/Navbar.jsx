@@ -8,16 +8,14 @@ import {
 } from "react-icons/fi";
 import { BsStars } from "react-icons/bs";
 import { useTheme } from "../../context/ThemeContext";
-import portfolioData from "../../data/portfolioData"
 
-function Navbar() {
+function Navbar({ data }) {
   const { darkMode, toggleTheme } = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
   const [highlightAI, setHighlightAI] = useState(false);
 
-  const navLinks = portfolioData.navLinks;
-  const navigation = portfolioData.navigation;
-  const {resume, aiAssistant} = portfolioData.buttons;
+  const { navLinks = [], navigation = {}, buttons = {} } = data || {};
+  const { resume, aiAssistant } = buttons;
 
 
   useEffect(() => {

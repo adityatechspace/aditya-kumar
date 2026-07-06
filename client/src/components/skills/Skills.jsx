@@ -1,72 +1,48 @@
 import SkillCard from "./SkillCard";
 
-function Skills() {
-  const skills = [
+function Skills({ skills = {} }) {
+  const skillSections = [
     {
       title: "Frontend Development",
+      technologies: skills.frontend || [],
       level: 95,
-      technologies: [
-        "React",
-        "JavaScript",
-        "Tailwind",
-        "HTML",
-        "CSS",
-      ],
     },
-
     {
       title: "Backend Development",
+      technologies: skills.backend || [],
       level: 90,
-      technologies: [
-        "Node.js",
-        "Express",
-        "REST API",
-        "JWT",
-      ],
     },
-
     {
       title: "Database",
+      technologies: skills.database || [],
       level: 85,
-      technologies: [
-        "MongoDB",
-        "MySQL",
-        "Firebase",
-      ],
     },
-
+    {
+      title: "Programming Languages",
+      technologies: skills.programming || [],
+      level: 90,
+    },
     {
       title: "Artificial Intelligence",
+      technologies: skills.ai || [],
       level: 88,
-      technologies: [
-        "OpenAI",
-        "Gemini",
-        "LangChain",
-        "Prompt Engineering",
-      ],
     },
-
     {
-      title: "Cloud & DevOps",
+      title: "DevOps & Cloud",
+      technologies: skills.devops || [],
       level: 80,
-      technologies: [
-        "Vercel",
-        "Render",
-        "GitHub",
-        "CI/CD",
-      ],
     },
-
     {
-      title: "Problem Solving",
-      level: 92,
-      technologies: [
-        "DSA",
-        "Algorithms",
-        "System Design",
-      ],
+      title: "Tools & Platforms",
+      technologies: skills.tools || [],
+      level: 82,
     },
-  ];
+    {
+      title: "Soft Skills",
+      technologies: skills.softSkills || [],
+      level: 84,
+    },
+  ].filter((section) => section.technologies.length > 0);
 
   return (
     <section
@@ -155,7 +131,7 @@ function Skills() {
 </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {skills.map((skill) => (
+          {skillSections.map((skill) => (
             <SkillCard
               key={skill.title}
               title={skill.title}
