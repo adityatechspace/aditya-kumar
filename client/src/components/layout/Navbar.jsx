@@ -8,14 +8,25 @@ import {
 } from "react-icons/fi";
 import { BsStars } from "react-icons/bs";
 import { useTheme } from "../../context/ThemeContext";
+import { FiLock } from "react-icons/fi";
 
 function Navbar({ data }) {
   const { darkMode, toggleTheme } = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
   const [highlightAI, setHighlightAI] = useState(false);
+    const [showThemeMessage, setShowThemeMessage] = useState(false);
+
 
   const { navLinks = [], navigation = {}, buttons = {} } = data || {};
   const { resume, aiAssistant } = buttons;
+
+    const handleThemeClick = () => {
+    setShowThemeMessage(true);
+
+    setTimeout(() => {
+      setShowThemeMessage(false);
+    }, 4000);
+  };
 
 
   useEffect(() => {
@@ -29,7 +40,9 @@ function Navbar({ data }) {
       localStorage.setItem("seen-ai-hint", "true");
     }, 6000);
   }
+
 }, []);
+
 
   return (
     <>
@@ -107,12 +120,27 @@ function Navbar({ data }) {
               </a>
 
               {/* Theme */}
-              <button
-                onClick={toggleTheme}
-                className="w-11 h-11 rounded-full border border-slate-700 bg-slate-900/40 backdrop-blur-md flex items-center justify-center transition hover:border-blue-500 hover:rotate-180 duration-500"
-              >
-                {darkMode ? <FiSun /> : <FiMoon />}
-              </button>
+<div className="relative">
+  <button
+    onClick={handleThemeClick}
+    aria-label="Theme settings locked"
+    className="w-11 h-11 rounded-full border border-slate-700 bg-slate-900/40 backdrop-blur-md flex items-center justify-center transition hover:border-blue-500 hover:rotate-180 duration-500"
+  >
+    {darkMode ? <FiSun /> : <FiMoon />}
+  </button>
+
+  {showThemeMessage && (
+    <div className="absolute right-0 top-full mt-3 z-50 w-64 rounded-xl border border-slate-700 bg-slate-950/95 px-4 py-3 text-sm text-slate-300 shadow-xl backdrop-blur-md animate-in fade-in slide-in-from-top-2 duration-300">
+       <div className="flex items-center gap-2">
+    <FiLock className="text-blue-400" size={16} />
+    <p className="font-medium text-white">Theme settings are locked</p>
+  </div>
+      <p className="mt-1 text-xs text-slate-400">
+        Available after development is completed.
+      </p>
+    </div>
+  )}
+</div>
 
              {/* Mobile Menu */}
 <button
