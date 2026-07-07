@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "nodemon server.js",
     "start": "node server.js",
-    "seed": "node seedPortfolio.js"
+    "seed": "node seedPortfolio.js",
+    "findPort" : "netstat -ano | findstr :5000"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",

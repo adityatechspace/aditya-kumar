@@ -1,7 +1,7 @@
 import ContactForm from "./contactForm";
 
 function Contact({ contact = {} }) {
-  const { email, phone } = contact;
+  const { email, phone, address } = contact;
 
   return (
     <section id="contact" className="py-32">
@@ -95,7 +95,7 @@ Let's Build Something Together
             ) : null}
 
             {phone ? (
-              <p className="text-slate-400">
+              <p className="text-slate-400 mb-3">
                 <span className="font-medium text-blue-400">Phone:</span>{" "}
                 <a
                   href={`tel:${phone}`}
@@ -105,6 +105,18 @@ Let's Build Something Together
                 </a>
               </p>
             ) : null}
+<div className="flex items-start text-slate-400">
+  <span className="shrink-0 font-medium text-blue-400">Address:</span>
+
+  <a
+    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`}
+    target="_blank"
+    rel="noreferrer"
+    className="ml-1 text-white hover:text-blue-400"
+  >
+    {address}
+  </a>
+</div>
           </div>
         </div>
       </div>

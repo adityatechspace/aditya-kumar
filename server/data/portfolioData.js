@@ -8,7 +8,7 @@ const personal = {
     description: "Passionate about building intelligent software, automation tools, and scalable full-stack applications using modern AI technologies.",
     availability: "Available for opportunity",
     techStack: ["Python", "React", "Node.js", "FastAPI", "Gemini AI"],
-    location: "Bengaluru, Karnataka-560064",
+    location: "Yelahanka New Town, Bengaluru, Karnataka-560064",
     profilePicture: "profile-picture.png"
   };
 
@@ -25,7 +25,9 @@ const portfolioData = {
   contact: {
     email: "adityaproinfo@gmail.com",
 
-    phone: "+91 8102256694"
+    phone: "+91 8102256694",
+
+    address: personal.location
   },
   
   // ==========================
