@@ -6,7 +6,7 @@ const personal = {
     role: "AI engineer",
     subtitle: ["Building AI-powered applications", "that solve real-world problems."],
     description: "Passionate about building intelligent software, automation tools, and scalable full-stack applications using modern AI technologies.",
-    availability: "Available for opportunity",
+    status: "Site Under Development",
     techStack: ["Python", "React", "Node.js", "FastAPI", "Gemini AI"],
     location: "Yelahanka New Town, Bengaluru, Karnataka-560064",
     profilePicture: "profile-picture.png"

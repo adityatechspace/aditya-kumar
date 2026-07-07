@@ -13,7 +13,7 @@ function Hero({ personal, buttons }) {
     title,
     firstName,
     secondName,
-    availability,
+    status,
     role,
     subtitle = [],
     description,
@@ -33,12 +33,12 @@ function Hero({ personal, buttons }) {
 <div className="flex flex-col justify-center">
 
   {/* Availability */}
-  <div className="inline-flex w-fit items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-5 py-2 mb-8">
-    <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+  <div className="inline-flex w-fit items-center gap-2 rounded-full border border-orange-500/20 bg-orange-400/10 px-5 py-2 mb-8">
+    <span className="h-2.5 w-2.5 rounded-full bg-orange-400 animate-pulse"></span>
     <div className="absolute -left-40 top-20 h-[350px] w-[350px] rounded-full bg-blue-500/10 blur-[120px]"></div>
 
-    <span className="text-sm font-medium text-emerald-300">
-      {availability}
+    <span className="text-sm font-medium text-orange-300">
+      {status}
     </span>
   </div>
 

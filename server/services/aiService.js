@@ -149,12 +149,19 @@ ${userQuestion}
 Answer:
 `;
 
-  try {
-    const result = await model.generateContent(prompt);
-    const response = result.response.text();
-    return response;
-  } catch (error) {
-    console.error("Gemini Error:", error);
-    return "Sorry, I'm currently unable to answer your question. Please try again in a few moments.";
+try {
+  const result = await model.generateContent(prompt);
+  const response = result.response.text();
+  return response;
+} catch (error) {
+  console.error("Gemini Error:", error);
+
+  const status = error?.status || error?.response?.status;
+
+  if (status === 429) {
+    return "The AI assistant has reached it's usage limit for now. Please try again later.";
   }
+
+  return "Sorry, I'm currently unable to answer your question. Please try again in a few moments.";
+}
 };

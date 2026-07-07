@@ -71,7 +71,7 @@ function Navbar({ data }) {
                   {item.text}
                 </a>
               ))}
-
+              
               {/* AI Assistant */}
               <a
   href={aiAssistant.link}
