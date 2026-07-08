@@ -39,9 +39,13 @@ function App() {
 
   if (loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-slate-950 text-white">
-        Loading portfolio...
-      </div>
+<div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-slate-950 text-white">
+  <div className="h-10 w-10 animate-spin rounded-full border-4 border-slate-700 border-t-cyan-400" />
+
+  <p className="text-sm font-medium tracking-wide text-slate-300">
+    Loading portfolio...
+  </p>
+</div>
     );
   }
 
