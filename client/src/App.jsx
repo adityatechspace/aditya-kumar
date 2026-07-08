@@ -43,7 +43,7 @@ function App() {
   <div className="h-10 w-10 animate-spin rounded-full border-4 border-slate-700 border-t-cyan-400" />
 
   <p className="text-sm font-medium tracking-wide text-slate-300">
-    Loading portfolio...
+    Welcome
   </p>
 </div>
     );
