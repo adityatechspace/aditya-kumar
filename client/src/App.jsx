@@ -16,8 +16,8 @@ import Certifications from "./components/certifications/Certifications";
 import Education from "./components/education/Education";
 import Contact from "./components/contact/Contact";
 import Footer from "./components/layout/Footer";
-import AdminLogin from "./components/admin/AdminLogin";
-import AdminTestimonials from "./components/admin/AdminTestimonials";
+import AdminLogin from "./components/admin/adminLogin";
+import AdminTestimonials from "./components/admin/adminTestimonials";
 function App() {
   const [portfolioData, setPortfolioData] = useState(null);
   const [loading, setLoading] = useState(true);
