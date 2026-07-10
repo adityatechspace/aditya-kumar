@@ -216,12 +216,10 @@ function Counter({ stats = {} }) {
               ">
 
                <CountUp
-               start={0}
-               end={item.number}
-               duration={2.3}
-               enableScrollSpy
-               scrollSpyOnce
-               />
+  start={0}
+  end={item.number}
+  duration={2.3}
+/>
 
 
                 {item.suffix}

@@ -13,7 +13,7 @@ const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
   useEffect(() => {
   async function fetchTestimonials() {
     try {
-      const response = await fetch(`${API_URL}/api/testimonials`);
+      const response = await fetch(`${API_URL}/testimonials`);
       const result = await response.json();
 
       if (!response.ok) {
@@ -48,7 +48,7 @@ async function handleSubmit(event) {
 
   try {
     const response = await fetch(
-      `${API_URL}/api/testimonials`,
+      `${API_URL}/testimonials`,
       {
         method: "POST",
         headers: {

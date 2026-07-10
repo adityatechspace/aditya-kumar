@@ -5,6 +5,8 @@ import contactRoutes from "./routes/contactRoutes.js";
 import errorHandler from "./middleware/errorHandler.js";
 import portfolioRoutes from "./routes/portfolioRoutes.js";
 import testimonialRoutes from "./routes/testimonialRoutes.js";
+import adminRoutes from "./routes/adminRoutes.js";
+import adminTestimonialRoutes from "./routes/adminTestimonialRoutes.js";
 
 const app = express();
 
@@ -40,6 +42,8 @@ app.use("/api/chat", chatRoutes);
 app.use("/api/contact", contactRoutes);
 app.use("/api/portfolio", portfolioRoutes);
 app.use("/api/testimonials", testimonialRoutes);
+app.use("/api/admin", adminRoutes);
+app.use("/api/admin", adminTestimonialRoutes);
 
 app.get("/api/health", (req, res) => {
   res.json({ success: true, message: "Backend is running" });
