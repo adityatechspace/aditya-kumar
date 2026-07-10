@@ -88,8 +88,7 @@ return (
 
     <GithubGraph githubUrl={portfolioData.social?.github} />
 
-    <Testimonials testimonials={portfolioData.testimonials} />
-
+    <Testimonials />
     <Certifications certifications={portfolioData.certifications} />
 
     <Education education={portfolioData.education} />
