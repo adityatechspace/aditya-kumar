@@ -1,71 +1,100 @@
 import { useState, useEffect } from "react";
-import { FaQuoteLeft, FaTimes } from "react-icons/fa";
+import {
+  FaQuoteLeft,
+  FaTimes,
+  FaLinkedinIn,
+} from "react-icons/fa";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
  function Testimonials() {
+  const [selectedPhoto, setSelectedPhoto] = useState(null);
+  const [photoPreview, setPhotoPreview] = useState("");
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const [testimonialItems, setTestimonialItems] = useState([]);
   const [isLoadingTestimonials, setIsLoadingTestimonials] = useState(true);
 
-  useEffect(() => {
   async function fetchTestimonials() {
-    try {
-      const response = await fetch(`${API_URL}/testimonials`);
-      const result = await response.json();
+  try {
+    const response = await fetch(`${API_URL}/testimonials`);
+    const result = await response.json();
 
-      if (!response.ok) {
-        throw new Error(result.message || "Unable to load testimonials.");
-      }
-
-      setTestimonialItems(
-        Array.isArray(result.testimonials) ? result.testimonials : []
-      );
-    } catch (error) {
-      console.error("Testimonial fetch error:", error);
-      setTestimonialItems([]);
-    } finally {
-      setIsLoadingTestimonials(false);
+    if (!response.ok) {
+      throw new Error(result.message || "Unable to load testimonials.");
     }
-  }
 
+    setTestimonialItems(
+      Array.isArray(result.testimonials)
+        ? result.testimonials
+        : []
+    );
+  } catch (error) {
+    console.error("Testimonial fetch error:", error);
+    setTestimonialItems([]);
+  } finally {
+    setIsLoadingTestimonials(false);
+  }
+}
+
+useEffect(() => {
   fetchTestimonials();
 }, []);
 
 async function handleSubmit(event) {
   event.preventDefault();
 
+  
+
   const form = event.currentTarget;
 
-  const payload = {
-    name: form.name.value.trim(),
-    designation: form.designation.value.trim(),
-    email: form.email.value.trim(),
-    comment: form.comment.value.trim(),
-  };
+  const formData = new FormData();
+
+  let linkedinUrl = form.linkedinUrl.value.trim();
+
+if (
+  linkedinUrl &&
+  !linkedinUrl.startsWith("http://") &&
+  !linkedinUrl.startsWith("https://")
+) {
+  linkedinUrl = `https://${linkedinUrl}`;
+}
+
+formData.append("linkedinUrl", linkedinUrl);
+
+  formData.append("name", form.name.value.trim());
+  formData.append("designation", form.designation.value.trim());
+  formData.append("email", form.email.value.trim());
+  formData.append("comment", form.comment.value.trim());
+
+  if (selectedPhoto) {
+    formData.append("profilePhoto", selectedPhoto);
+  }
 
   try {
-    const response = await fetch(
-      `${API_URL}/testimonials`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      }
-    );
+    const response = await fetch(`${API_URL}/testimonials`, {
+      method: "POST",
+      body: formData,
+    });
 
-    const result = await response.json();
+    const contentType = response.headers.get("content-type") || "";
+
+    const result = contentType.includes("application/json")
+      ? await response.json()
+      : { message: await response.text() };
 
     if (!response.ok) {
       throw new Error(result.message || "Unable to submit testimonial.");
     }
 
     form.reset();
+    setSelectedPhoto(null);
     setIsSubmitted(true);
+
+    // Optional: refresh approved testimonials
+    // fetchTestimonials();
+
   } catch (error) {
     console.error("Testimonial submission error:", error);
     alert(error.message || "Something went wrong. Please try again.");
@@ -113,8 +142,8 @@ async function handleSubmit(event) {
 ) : testimonialItems.length > 0 ? (          <div className="grid gap-8 md:grid-cols-3">
             {testimonialItems.map((item, index) => (
               <article
-                key={`${item.name}-${index}`}
-                className="relative rounded-2xl border border-slate-800 bg-slate-900 p-7"
+              key={item._id || `${item.name}-${index}`}               
+              className="relative rounded-2xl border border-slate-800 bg-slate-900 p-7"
               >
                 <FaQuoteLeft className="mb-5 text-2xl text-blue-400/70" />
 
@@ -122,15 +151,63 @@ async function handleSubmit(event) {
                   {item.comment}
                 </p>
 
-                <div className="mt-7 border-t border-slate-800 pt-5">
-                  <h3 className="font-semibold text-white">
-                    {item.name}
-                  </h3>
+              <div className="mt-7 flex items-center justify-between border-t border-slate-800 pt-5">
 
-                  <p className="mt-1 text-sm text-blue-400">
-                    {item.designation}
-                  </p>
-                </div>
+  <div className="flex items-center gap-4">
+
+    <div className="h-14 w-14 overflow-hidden rounded-full border border-slate-700 bg-slate-800">
+      {item.profilePhoto ? (
+        <img
+          src={item.profilePhoto}
+          alt={item.name}
+          className="h-full w-full object-cover"
+        />
+      ) : (
+        <div className="flex h-full w-full items-center justify-center text-xs text-slate-500">
+          👤
+        </div>
+      )}
+    </div>
+
+    <div>
+      <h3 className="font-semibold text-white">
+        {item.name}
+      </h3>
+
+      <p className="mt-1 text-sm text-blue-400">
+        {item.designation}
+      </p>
+    </div>
+
+  </div>
+
+  {item.linkedinUrl && (
+    <a
+      href={item.linkedinUrl}
+      target="_blank"
+      rel="noreferrer"
+      className="
+        flex
+        h-11
+        w-11
+        items-center
+        justify-center
+        rounded-full
+        border
+        border-blue-500/30
+        bg-blue-500/10
+        text-blue-400
+        transition
+        hover:bg-blue-500
+        hover:text-white
+      "
+      title="View LinkedIn Profile"
+    >
+      <FaLinkedinIn size={18} />
+    </a>
+  )}
+
+</div>
               </article>
             ))}
           </div>
@@ -162,7 +239,8 @@ async function handleSubmit(event) {
         )}
 
         {/* Optional button even after testimonials exist */}
-{!isLoadingTestimonials && testimonialItems.length > 0 && (          <div className="mt-10 text-center">
+{!isLoadingTestimonials && testimonialItems.length > 0 && (          
+  <div className="mt-10 text-center">
             <button
               type="button"
               onClick={() => setIsFormOpen(true)}
@@ -176,8 +254,24 @@ async function handleSubmit(event) {
 
       {/* Modal */}
       {isFormOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 px-4 backdrop-blur-sm">
-          <div className="relative w-full max-w-lg rounded-3xl border border-slate-700 bg-slate-900 p-7 shadow-2xl">
+       <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-950/80 px-4 py-8 backdrop-blur-sm">
+  <div className="flex min-h-full items-center justify-center">
+    <div
+      className="
+        relative
+        w-full
+        max-w-2xl
+        max-h-[90vh]
+        overflow-y-auto
+
+        rounded-3xl
+        border
+        border-slate-700
+        bg-slate-900
+        p-7
+        shadow-2xl
+      "
+    >
             <button
               type="button"
               onClick={closeForm}
@@ -260,6 +354,7 @@ async function handleSubmit(event) {
                     >
                       Email <span className="text-slate-500">(optional)</span>
                     </label>
+                    
 
                     <input
                       id="testimonial-email"
@@ -270,6 +365,124 @@ async function handleSubmit(event) {
                     />
                   </div>
 
+                  <div>
+  <label
+    htmlFor="testimonial-linkedin"
+    className="mb-2 block text-sm font-medium text-slate-300"
+  >
+    LinkedIn Profile{" "}
+    <span className="text-slate-500">(optional)</span>
+  </label>
+
+  <input
+    id="testimonial-linkedin"
+    name="linkedinUrl"
+    type="text"
+    placeholder="https://www.linkedin.com/in/your-username"
+    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none placeholder:text-slate-600 focus:border-blue-500"
+  />
+
+  <p className="mt-2 text-xs text-slate-500">
+    Optional. Your LinkedIn profile may be displayed publicly with your testimonial if it is approved.
+  </p>
+</div>
+
+                  <div>
+  <label
+    htmlFor="testimonial-profile-photo"
+    className="mb-2 block text-sm font-medium text-slate-300"
+  >
+    Profile Photo <span className="text-slate-500">(optional)</span>
+  </label>
+
+  <input
+  id="testimonial-profile-photo"
+  name="profilePhoto"
+  type="file"
+  accept="image/jpeg,image/png,image/webp"
+  onChange={(event) => {
+    const file = event.target.files?.[0] || null;
+
+    if (!file) {
+      setSelectedPhoto(null);
+      setPhotoPreview("");
+      return;
+    }
+
+    if (file.size > 2 * 1024 * 1024) {
+      alert("Profile photo must be 2 MB or smaller.");
+      event.target.value = "";
+      setSelectedPhoto(null);
+      setPhotoPreview("");
+      return;
+    }
+
+    setSelectedPhoto(file);
+    setPhotoPreview(URL.createObjectURL(file));
+  }}
+  className="
+    block
+    w-full
+    cursor-pointer
+    rounded-xl
+    border
+    border-slate-700
+    bg-slate-950
+    px-4
+    py-3
+    text-sm
+    text-slate-300
+
+    file:mr-4
+    file:rounded-lg
+    file:border-0
+    file:bg-blue-500/15
+    file:px-4
+    file:py-2
+    file:font-medium
+    file:text-blue-300
+    hover:file:bg-blue-500/25
+  "
+/>
+
+<p className="mt-2 text-xs text-slate-500">
+  Optional. JPEG, PNG, or WebP only (maximum 2 MB). If approved, this photo
+  will be displayed publicly with your testimonial.
+</p>
+
+{photoPreview && (
+  <div className="mt-5 flex items-center gap-4 rounded-xl border border-slate-700 bg-slate-900/60 p-4">
+    <img
+      src={photoPreview}
+      alt="Profile preview"
+      className="h-16 w-16 rounded-full border border-slate-700 object-cover"
+    />
+
+    <div className="flex-1">
+      <p className="font-medium text-slate-200">
+        {selectedPhoto?.name}
+      </p>
+
+      <p className="mt-1 text-xs text-slate-500">
+        {(selectedPhoto?.size / 1024).toFixed(1)} KB
+      </p>
+    </div>
+
+    <button
+      type="button"
+      onClick={() => {
+        setSelectedPhoto(null);
+        setPhotoPreview("");
+
+        document.getElementById("testimonial-profile-photo").value = "";
+      }}
+      className="rounded-lg border border-red-500/30 px-3 py-1.5 text-xs text-red-300 transition hover:bg-red-500/10"
+    >
+      Remove
+    </button>
+  </div>
+)}
+</div>
                   <div>
                     <label
                       htmlFor="testimonial-comment"
@@ -298,6 +511,7 @@ async function handleSubmit(event) {
                 </form>
               </>
             )}
+          </div>
           </div>
         </div>
       )}

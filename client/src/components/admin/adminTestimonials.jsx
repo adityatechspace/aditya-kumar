@@ -192,27 +192,88 @@ function AdminTestimonials() {
                 key={testimonial._id}
                 className="rounded-2xl border border-slate-800 bg-slate-900 p-6"
               >
-                <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-                  <div>
-                    <h2 className="text-xl font-semibold text-white">
-                      {testimonial.name}
-                    </h2>
+              <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
 
-                    <p className="mt-1 text-blue-400">
-                      {testimonial.designation}
-                    </p>
+  <div className="flex flex-1 items-start gap-5">
 
-                    {testimonial.email && (
-                      <p className="mt-2 text-sm text-slate-500">
-                        Private email: {testimonial.email}
-                      </p>
-                    )}
-                  </div>
+    <a
+      href={testimonial.profilePhoto}
+      target="_blank"
+      rel="noreferrer"
+      className="shrink-0"
+    >
+      <div className="h-20 w-20 overflow-hidden rounded-full border border-slate-700 bg-slate-800">
+        {testimonial.profilePhoto ? (
+        <a
+    href={testimonial.profilePhoto}
+    target="_blank"
+    rel="noreferrer"
+    className="shrink-0"
+  >
+    ...
+  </a>
+        ) : (
+          <div className="flex h-full w-full items-center justify-center text-xs text-slate-500">
+            No Photo
+          </div>
+        )}
+      </div>
+    </a>
 
-                  <span className="rounded-full border border-slate-700 px-3 py-1 text-xs font-medium uppercase tracking-wide text-slate-400">
-                    {testimonial.status}
-                  </span>
-                </div>
+    <div className="flex-1">
+
+      <h2 className="text-xl font-semibold text-white">
+        {testimonial.name}
+      </h2>
+
+      <p className="mt-1 text-blue-400">
+        {testimonial.designation}
+      </p>
+
+      {testimonial.email && (
+        <p className="mt-2 text-sm text-slate-500">
+          📧 {testimonial.email}
+        </p>
+      )}
+
+      {testimonial.linkedinUrl && (
+        <a
+          href={testimonial.linkedinUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="mt-2 inline-flex items-center gap-2 text-sm text-cyan-400 hover:underline"
+        >
+          🔗 View LinkedIn Profile
+        </a>
+      )}
+
+    </div>
+
+  </div>
+
+  <span
+    className={`
+      rounded-full
+      px-3
+      py-1
+      text-xs
+      font-semibold
+      uppercase
+      tracking-wider
+
+      ${
+        testimonial.status === "approved"
+          ? "border border-emerald-500/30 bg-emerald-500/10 text-emerald-400"
+          : testimonial.status === "rejected"
+          ? "border border-red-500/30 bg-red-500/10 text-red-400"
+          : "border border-amber-500/30 bg-amber-500/10 text-amber-400"
+      }
+    `}
+  >
+    {testimonial.status}
+  </span>
+
+</div>
 
                 <p className="mt-5 whitespace-pre-wrap leading-7 text-slate-300">
                   {testimonial.comment}

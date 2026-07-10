@@ -2,6 +2,11 @@ import mongoose from "mongoose";
 
 const testimonialSchema = new mongoose.Schema(
   {
+    profilePhoto: {
+  type: String,
+  default: "",
+},
+
     name: {
       type: String,
       required: [true, "Name is required"],
@@ -22,6 +27,11 @@ const testimonialSchema = new mongoose.Schema(
       lowercase: true,
       default: "",
     },
+
+    linkedinUrl: {
+  type: String,
+  default: "",
+},
 
     comment: {
       type: String,
