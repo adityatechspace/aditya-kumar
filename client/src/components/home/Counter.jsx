@@ -1,5 +1,4 @@
 import CountUpLib from "react-countup";
-import { useInView } from "react-intersection-observer";
 import {
   FaCode,
   FaLaptopCode,
@@ -14,10 +13,6 @@ const CountUp =
     : CountUpLib;
 
 function Counter({ stats = {} }) {
-  const { ref, inView } = useInView({
-    triggerOnce: false,
-    threshold: 0.4,
-  });
 
   const statItems = [
     {
@@ -47,9 +42,7 @@ function Counter({ stats = {} }) {
   ];
 
   return (
-    <section
-      ref={ref}
-      className="py-24"
+    <section className="py-24"
     >
       <div className="max-w-7xl mx-auto px-6">
 
@@ -210,26 +203,26 @@ function Counter({ stats = {} }) {
               {/* Number */}
 
               <h3 className="
-                relative
-                text-center
-
-                text-5xl
-                font-extrabold
-
-                bg-gradient-to-r
-                from-blue-400
-                via-cyan-400
-                to-purple-400
-
-                bg-clip-text
-                text-transparent
+                  relative
+    text-center
+    text-5xl
+    font-extrabold
+    bg-gradient-to-r
+    from-blue-400
+    via-cyan-400
+    to-purple-400
+    bg-clip-text
+    text-transparent
               ">
 
-                <CountUp
-                  start={0}
-                  end={inView ? item.number : 0}
-                  duration={2.3}
-                />
+               <CountUp
+               start={0}
+               end={item.number}
+               duration={2.3}
+               enableScrollSpy
+               scrollSpyOnce
+               />
+
 
                 {item.suffix}
 
