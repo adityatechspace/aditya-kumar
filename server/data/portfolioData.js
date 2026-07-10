@@ -156,36 +156,85 @@ const portfolioData = {
   // EXPERIENCE
   // ==========================
 
-  experience: [
-    {
-      company: "Kriya NextWealth Pvt. Ltd.",
-      logo: "/kriya-nextwealth.png",
-      role: "process Associate",
-      duration: "March 2026 - Present",
-      location: "Bengaluru",
-      type: "Full Time",
-      description: "I got oppootrunity from Kriya after a huge covovery from my health, which caused me to leave my previous job from OLA.",
-      responsibilities: [
-        "Working on AI data to clean the data and make it usable for AI models.",
-
-        "Follow the client's requirements, give useful impact to as per daily insights of the client side and provide reliable outcomes."
-      ],
-      technologies: ["Python", "LLM", "Language Expert"]
+  experience: {
+    section: {
+      title:"Experience",
+      subtitle: "What I've Been Working On",
+      description: "Built practical experience across AI data operations, language-focused AI evaluation, and process workflows. Started as a Trainee at Intel, developing exposure to structured technical processes and professional delivery standards. Later worked with OLA Krutrim as an AI Language Expert, contributing to language data quality, transcription-related tasks, and AI model evaluation. Currently working at Kriya NextWealth as a Process Associate, supporting AI data cleaning, following client-specific requirements, and delivering daily quality insights for model-training workflows."
     },
 
-        {
-      company: "OLA Krutrim",
-      logo: ["/ola.png", "krutrim-logo.avif"],
-      role: "AI language expert",
-      duration: "March 2025 - July 2025",
-      location: "Bengaluru",
-      type: "Full Time",
-      description: "This was very first full time job of my entire life. I was so happy to be placed very soon before my college final exam.",
-      responsibilities: ["To train AI model from the provided data of defferent languages", "Making sure AI model can understand the human language and nural network."
-      ],
-      technologies: ["Python", "LLM", "Language Expert"]
-    }
+    data:[
+    {
+company: "Kriya NextWealth Pvt. Ltd.",
+logo: "/kriya-nextwealth.png",
+role: "Process Associate",
+duration: "March 2026 - Present",
+location: "Bengaluru, India",
+type: "Full Time",
+description:
+"Working in AI data operations, supporting data-quality workflows that help prepare reliable datasets for AI model development and evaluation.",
+responsibilities: [
+"Clean, review, and organize AI training data to improve its quality, consistency, and usability.",
+"Follow client-specific guidelines and quality requirements across assigned workflows.",
+"Analyze daily task insights, identify data-quality issues, and support reliable project outcomes.",
+"Maintain accuracy and consistency while working with language-focused AI data."
+],
+technologies: [
+"Python",
+"AI Data Operations",
+"LLM Workflows",
+"Data Quality",
+"Language Data"
+]
+},
+
+{
+company: "OLA Krutrim",
+logo: ["/ola.png", "/krutrim-logo.avif"],
+role: "AI Language Expert",
+duration: "March 2025 - July 2025",
+location: "Bengaluru, India",
+type: "Full Time",
+description:
+"Worked on language-focused AI data workflows, contributing to the preparation, review, and evaluation of multilingual data used in AI model development.",
+responsibilities: [
+"Reviewed and prepared multilingual language data for AI training and evaluation workflows.",
+"Applied language expertise to improve data accuracy, clarity, and consistency.",
+"Followed project guidelines to support natural-language understanding tasks.",
+"Contributed to quality checks for language data used in AI model development."
+],
+technologies: [
+"Python",
+"LLM Workflows",
+"Natural Language Processing",
+"AI Data Annotation",
+"Language Data Quality"
+]
+},
+    {
+   company: "Intel Corporation",
+  logo: "/intel.png",
+  role: "AI Trainee – Future Workforce Program",
+  duration: "4 months",
+  location: "Punjab, India (College Campus)",
+  type: "Trainee",
+  description:
+    "Completed an AI training program focused on the fundamentals of machine learning, multilingual data processing, and neural networks. This was my first full-time professional experience, providing early exposure to structured AI workflows and practical model-training concepts.",
+  responsibilities: [
+    "Worked with provided multilingual datasets for AI and machine learning training exercises.",
+    "Prepared, cleaned, and organized data to support language-understanding model workflows.",
+    "Learned core concepts of natural language processing, machine learning, and neural networks.",
+    "Used Python-based tools to explore data, train basic models, and evaluate outputs."
   ],
+  technologies: [
+    "Python",
+    "Jupyter Notebook",
+    "NumPy",
+    "scikit-learn"
+  ]
+}
+  ]
+  },
 
   // ==========================
   // EDUCATION

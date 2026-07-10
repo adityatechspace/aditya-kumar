@@ -1,23 +1,10 @@
 function Experience({ experience = [] }) {
-  const experiences = experience.length
-    ? experience
-    : [
-        {
-          company: "Kriya NextWealth Pvt. Ltd.",
-          logo: "/kriya-nextwealth.png",
-          role: "Process Associate",
-          duration: "March 2026 - Present",
-          location: "Bengaluru",
-          type: "Full Time",
-          description:
-            "Working with AI data operations and helping build reliable client-facing models.",
-          responsibilities: [
-            "Manage AI data cleanup and transformation.",
-            "Support daily insights and client deliverables.",
-          ],
-          technologies: ["Python", "LLM", "Data Operations"],
-        },
-      ];
+
+  if (!experience?.section){
+    return null;
+  }
+  const {title, subtitle, description} = experience.section;
+  const {data = []} = experience.data;
 
   return (
     <section
@@ -54,7 +41,7 @@ function Experience({ experience = [] }) {
             font-semibold
             text-blue-400/80
             ">
-                        EXPERIENCE
+                        {title}
 
             </span>
 
@@ -75,8 +62,7 @@ function Experience({ experience = [] }) {
         bg-clip-text
         text-transparent
         ">
-What I've Been Working On
-
+          {subtitle}
         </h2>
 
         <p className="
@@ -86,9 +72,7 @@ What I've Been Working On
         leading-8
         text-slate-400
         ">
-            Ask questions about my
-            projects, skills, experience,
-            certifications and education.
+          {description}
         </p>
 
         <div className="
@@ -106,20 +90,21 @@ What I've Been Working On
 
 </div>
 
-       <div className="space-y-8">
-  {experiences.map((item, index) => (
+<div className="space-y-8">
+  {(experience.data || []).map((item) => (
     <div
-      key={index}
+      key={`${item.company}-${item.role}`}
       className="rounded-2xl border border-slate-800 bg-slate-900 p-8"
     >
       <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
         <div className="flex items-center gap-4">
           {/* Company logo / logos */}
           <div className="flex shrink-0 items-center gap-2">
-            {Array.isArray(item.logo) ? (
-              item.logo.map((logo, logoIndex) => (
+            {(Array.isArray(item.logo) ? item.logo : [item.logo])
+              .filter(Boolean)
+              .map((logo, logoIndex) => (
                 <div
-                  key={logoIndex}
+                  key={`${item.company}-logo-${logoIndex}`}
                   className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-xl border border-slate-700 bg-white p-2"
                 >
                   <img
@@ -128,19 +113,9 @@ What I've Been Working On
                     className="h-full w-full object-contain"
                   />
                 </div>
-              ))
-            ) : (
-              <div className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-xl border border-slate-700 bg-white p-2">
-                <img
-                  src={item.logo}
-                  alt={`${item.company} logo`}
-                  className="h-full w-full object-contain"
-                />
-              </div>
-            )}
+              ))}
           </div>
 
-          {/* Role and company */}
           <div>
             <h3 className="text-2xl font-semibold text-white">
               {item.role}
@@ -161,26 +136,37 @@ What I've Been Working On
         </span>
       </div>
 
-      <p className="mt-5 text-slate-400">
-        {item.description}
-      </p>
+      {/* Description */}
+      {item.description && (
+        <p className="mt-5 text-slate-400">
+          {item.description}
+        </p>
+      )}
 
-      <ul className="mt-5 list-inside list-disc space-y-2 text-slate-400">
-        {(item.responsibilities || []).map((responsibility, responsibilityIndex) => (
-          <li key={responsibilityIndex}>{responsibility}</li>
-        ))}
-      </ul>
+      {/* Responsibilities */}
+      {item.responsibilities?.length > 0 && (
+        <ul className="mt-5 list-inside list-disc space-y-2 text-slate-400">
+          {item.responsibilities.map((responsibility, responsibilityIndex) => (
+            <li key={`${item.company}-responsibility-${responsibilityIndex}`}>
+              {responsibility}
+            </li>
+          ))}
+        </ul>
+      )}
 
-      <div className="mt-6 flex flex-wrap gap-2">
-        {(item.technologies || []).map((technology) => (
-          <span
-            key={technology}
-            className="rounded-full border border-slate-700 bg-slate-800 px-3 py-1 text-sm text-slate-300"
-          >
-            {technology}
-          </span>
-        ))}
-      </div>
+      {/* Technologies */}
+      {item.technologies?.length > 0 && (
+        <div className="mt-6 flex flex-wrap gap-2">
+          {item.technologies.map((technology, technologyIndex) => (
+            <span
+              key={`${item.company}-technology-${technologyIndex}`}
+              className="rounded-full border border-slate-700 bg-slate-800 px-3 py-1 text-sm text-slate-300"
+            >
+              {technology}
+            </span>
+          ))}
+        </div>
+      )}
     </div>
   ))}
 </div>
