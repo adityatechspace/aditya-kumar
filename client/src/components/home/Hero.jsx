@@ -132,7 +132,8 @@ function Hero({ personal, buttons }) {
                   <img
                     src={profilePicture}
                     alt={`${firstName} ${secondName}`}
-                    className="relative w-full object-cover transition duration-500 hover:scale-105"
+                    className=" mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 75%, transparent 100%);"
                   />
 
                   {/* Availability Badge */}
