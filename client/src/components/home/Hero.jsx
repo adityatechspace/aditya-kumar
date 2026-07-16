@@ -114,41 +114,44 @@ function Hero({ personal, buttons }) {
             </div>
           </div>
 
-          {/* Right Content */}
-          <div
-            style={{ transitionDelay: "160ms" }}
-            className={`${reveal()} flex justify-center lg:justify-end`}
-          >
-            <div className="relative w-full max-w-[360px]">
-              {/* Background Glow */}
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-cyan-500/20 blur-[90px] scale-125 rounded-full" />
+{/* Right Content */}
+<div
+  style={{ transitionDelay: "160ms" }}
+  className={`${reveal()} flex justify-center lg:justify-end`}
+>
+  <div className="relative w-full max-w-[360px] group">
+    {/* Background Glow */}
+    <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-cyan-500/20 blur-[90px] scale-125 rounded-full transition-opacity duration-500 group-hover:opacity-80" />
 
-              {/* Gradient Border */}
-              <div className="relative rounded-[32px] p-[2px] bg-gradient-to-br from-blue-500 via-purple-500 to-cyan-500">
-                {/* Card */}
-                <div className="relative overflow-hidden rounded-[30px] bg-slate-950">
-                  <div className="absolute -top-20 -left-20 w-52 h-52 rounded-full bg-blue-500/20 blur-3xl" />
+    {/* Gradient Border */}
+    <div className="relative rounded-[32px] p-[2px] bg-gradient-to-br from-blue-500 via-purple-500 to-cyan-500 transition-all duration-500 ease-out group-hover:-translate-y-2 group-hover:shadow-2xl group-hover:shadow-purple-500/30">
+      {/* Card */}
+      <div className="relative overflow-hidden rounded-[30px] bg-slate-950">
+        <div className="absolute -top-20 -left-20 w-52 h-52 rounded-full bg-blue-500/20 blur-3xl" />
 
-                  <img
-                    src={profilePicture}
-                    alt={`${firstName} ${secondName}`}
-                    className=" mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, black 75%, transparent 100%);"
-                  />
+        <img
+          src={profilePicture}
+          alt={`${firstName} ${secondName}`}
+          className="relative w-full object-cover object-top transition duration-500"
+          style={{
+            maskImage: "linear-gradient(to bottom, black 75%, transparent 100%)",
+            WebkitMaskImage: "linear-gradient(to bottom, black 75%, transparent 100%)",
+          }}
+        />
 
-                  {/* Availability Badge */}
-                  <div className="absolute bottom-5 left-1/2 -translate-x-1/2">
-                    <div className="flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900/80 px-5 py-2 backdrop-blur-md shadow-xl">
-                      <span className="h-2.5 w-2.5 rounded-full bg-green-500 animate-pulse" />
-                      <span className="text-sm font-medium text-white whitespace-nowrap">
-                        Open to Opportunities
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+        {/* Availability Badge */}
+        <div className="absolute bottom-5 left-1/2 -translate-x-1/2">
+          <div className="flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900/80 px-5 py-2 backdrop-blur-md shadow-xl">
+            <span className="h-2.5 w-2.5 rounded-full bg-green-500 animate-pulse" />
+            <span className="text-sm font-medium text-white whitespace-nowrap">
+              Open to Opportunities
+            </span>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
         </div>
 
         {/* Scroll cue */}
