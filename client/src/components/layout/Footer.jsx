@@ -9,6 +9,7 @@ import {
 import { FaReact, FaNodeJs } from "react-icons/fa";
 import { RiTailwindCssFill } from "react-icons/ri";
 import { SiExpress, SiVite, SiMongodb } from "react-icons/si";
+import { SiHackerrank } from "react-icons/si";
 
 function Footer({ personal = {}, footer = {} }) {
   const name = personal.firstName && personal.secondName ? `${personal.firstName} ${personal.secondName}` : "Aditya Kumar";
@@ -21,7 +22,7 @@ function Footer({ personal = {}, footer = {} }) {
     { icon: FaGithub, href: "https://github.com/adityatechspace", hover: "hover:border-white hover:text-white hover:shadow-white/10" },
     { icon: FaLinkedin, href: "https://www.linkedin.com/in/go-on-adityakumar", hover: "hover:border-blue-500 hover:text-blue-500 hover:shadow-blue-500/20" },
     { icon: FaEnvelope, href: "mailto:adityaproinfo@gmail.com", hover: "hover:border-red-500 hover:text-red-500 hover:shadow-red-500/20" },
-    { icon: FaGlobe, href: "https://adityatechspace.github.io/", hover: "hover:border-cyan-500 hover:text-cyan-400 hover:shadow-cyan-500/20" },
+    { icon: SiHackerrank, href: "https://www.hackerrank.com/profile/adityatechspace", hover: "hover:border-emerald-500 hover:text-emerald-400 hover:shadow-emerald-500/20" },
   ];
 
   const stack = [
