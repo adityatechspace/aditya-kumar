@@ -34,12 +34,19 @@ function ProjectCard({ title, description, image, technologies = [], github, dem
 
   {/* Live Demo */}
   <button
-    onClick={() => setShowComingSoon(false)}
-    className="flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition"
-  >
-    <FiExternalLink />
-    Live Demo
-  </button>
+  onClick={() => {
+    if (!demo) {
+      setShowComingSoon(true);
+      return;
+    }
+
+    window.open(demo, "_blank", "noopener,noreferrer");
+  }}
+  className="flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition"
+>
+  <FiExternalLink />
+  Live Demo
+</button>
 
   {/* Coming Soon Popup */}
   {showComingSoon && (
