@@ -34,7 +34,7 @@ function ProjectCard({ title, description, image, technologies = [], github, dem
 
   {/* Live Demo */}
   <button
-    onClick={() => setShowComingSoon(true)}
+    onClick={() => setShowComingSoon(false)}
     className="flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition"
   >
     <FiExternalLink />
