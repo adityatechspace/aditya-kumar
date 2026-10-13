@@ -141,7 +141,7 @@ FORMATTING
 - Keep simple answers as plain short text; avoid heavy formatting for one-line replies.
 `;
 
-  const model = genAI.getGenerativeModel({ model: "gemini-3.6-flash" });
+  const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash-lite" });
 
   const prompt = `
 ${portfolioContext}
